@@ -47,5 +47,4 @@ def shopOpen(role):
                 print("Terima kasih sudah berkunjung. Sampai bertemu lagi!")
                 break    
 
-role = "agent"
 shopOpen("agent")
