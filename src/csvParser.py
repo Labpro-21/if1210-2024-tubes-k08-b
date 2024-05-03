@@ -1,3 +1,6 @@
+import sys
+sys.path.append("C:\if1210-2024-tubes-k08-b\data")
+
 def splitSemicolon(text): # Fungsi mirip .split() namun untuk string dengan pemisah semicolon saja
     separated = []
     word = ''
@@ -17,9 +20,12 @@ def splitSemicolon(text): # Fungsi mirip .split() namun untuk string dengan pemi
 
 def csvRead(path): # Fungsi membaca file .csv baris per baris
     csvOpen = open(path,'r') # Membuka file .csv
+    cleanData = []
     
     for row in csvOpen: # Membaca setiap baris
-        cleanData = splitSemicolon(row) # Memisahkan kalimat dari semicolon
+        cleanData.append(splitSemicolon(row)) # Memisahkan kalimat dari semicolon
     
     csvOpen.close() # Menutup file
     return cleanData
+
+print(csvRead("C:\if1210-2024-tubes-k08-b\data\item_shop.csv"))

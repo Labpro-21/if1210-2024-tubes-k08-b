@@ -1,3 +1,5 @@
+from csvParser import splitSemicolon, csvRead
+
 def shopOpen(role):
     if role == "agent":
         print("Selamat datang di Shop!")
@@ -45,6 +47,4 @@ def shopOpen(role):
             else: # pilihMenu == "keluar"
                 keluar == True
                 print("Terima kasih sudah berkunjung. Sampai bertemu lagi!")
-                break   
-
-shopOpen("agent")
+                break
