@@ -45,6 +45,6 @@ def shopOpen(role):
             else: # pilihMenu == "keluar"
                 keluar == True
                 print("Terima kasih sudah berkunjung. Sampai bertemu lagi!")
-                break    
+                break   
 
 shopOpen("agent")
