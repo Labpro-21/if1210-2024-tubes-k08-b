@@ -1,5 +1,5 @@
 from csvParser import splitSemicolonInt, csvReadInt, csvWrite
-pathFileMonster = r"C:\Files\if1210-2024-tubes-k08-b\monster.csv"
+pathFileMonster = r"C:\Files\if1210-2024-tubes-k08-b\data\monster.csv"
 listMonster = csvReadInt(pathFileMonster)
 
 # FUNGSI UNTUK PENAMBAHAN MONSTER
