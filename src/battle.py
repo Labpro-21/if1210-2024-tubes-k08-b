@@ -1,17 +1,17 @@
 import random
-random_number = random.randint(1, 10)
 
-from readcsv import * 
+from readwritecsv import * 
 from potion import *
+from RandomNumberGenerator import *
+random_number = RNG(1,10)
 
-def choose() :
-    file = read_csv("src\yourmonster.csv")
+def choose(path) :
+    file = read_csv(path)
     print("=======PLEASE CHOOSE A MONSTER=======")
     for i in range(len(file)-1) :
         print(f"{i+1}. {file[i+1][1]}")
     chosen = int(input("-------->"))
     return chosen
-
 
 def decoy() :
     1+1
@@ -65,11 +65,14 @@ def battle(monsterpath,yourmonsterpath,chosen) :
             while True :
                 print("=======CHOOSE A POTION !=======")
                 print("1. STRENGHT")
+                print(f"   you have :{potion_data[1][1]}")
                 print("2. RESILIENSE")
+                print(f"   you have :{potion_data[2][1]}")
                 print("3. HEAL")
+                print(f"   you have :{potion_data[3][1]}")
                 print("4. CANCEL")
                 potionchoice = int(input("-------->"))
-                newstat = potion(potion_data,used_Pot_Array,yourattack,yourdefense,yourhealth,1000,file2[chosen][1],potionchoice)
+                newstat = potion(potion_data,used_Pot_Array,yourattack,yourdefense,yourhealth,100000,file2[chosen][1],potionchoice)
                 if potionchoice ==1 :
                     if newstat==0 :
                         continue
@@ -119,4 +122,4 @@ def battle(monsterpath,yourmonsterpath,chosen) :
             return 0
             break
         n+=1
-battle("src\enemymonster.csv","src\yourmonster.csv",choose())
+battle("src\enemymonster.csv","src\yourmonster.csv",choose("src\yourmonster.csv"))
