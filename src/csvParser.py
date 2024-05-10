@@ -1,5 +1,5 @@
 import sys
-sys.path.append(r"C:\Files\tubes\final\monster.csv")
+sys.path.append(r"C:\Files\if1210-2024-tubes-k08-b\monster.csv")
 
 def splitSemicolon(text):                                                  
     separated = []
