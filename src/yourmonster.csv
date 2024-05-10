@@ -1,0 +1,6 @@
+id,name,health,attack,defend,level,maxlevel
+1,pika,500,50000,10,1,1000
+2,zuma,600,35,15,1,1000
+3,brody,200,150,10,1,1000
+4,celsi,400,60,20,1,1000
+5,roma,700,20,25,1,1000
