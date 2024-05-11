@@ -95,14 +95,14 @@ def inventory (monsId, monsData, potData, monsLevel, access, oc):
   elif access == True :
     print(f'Jumlah O.W.C.A. Coin Anda saat ini : {oc}')
     while True :
-      check = input('Silakan pilih jenis item yang ingin diketahui Anda (Monster/Potion): ')
-      if check == 'potion' :
+      check = input('Silakan pilih jenis item yang ingin diketahui Anda (Monster/Potion/Back): ')
+      if check.lower() == 'potion' :
         for i in range(len(potData[0])):
           print(f'{i+1}. Type: {potData[0][i]}')
         
         while True :
           pot_Number = input('Masukkan nomor potion untuk menampilkan detail item (1/2/3/Back): ')
-          if pot_Number != 'Back' :
+          if pot_Number.lower() != 'back':
             pot_Number = int(pot_Number)
             print('POTION')
             print(f'Type: {potData[0][pot_Number-1]}')
@@ -110,7 +110,7 @@ def inventory (monsId, monsData, potData, monsLevel, access, oc):
           else :
             break
 
-      elif check == 'monster' :
+      elif check.lower() == 'monster' :
         number = 0
         for i in range (1, len(monsData)):
           for j in range (len(monsId)):
@@ -120,7 +120,7 @@ def inventory (monsId, monsData, potData, monsLevel, access, oc):
       
         while True :
           mons_Number = input('Masukkan nomor monster untuk menampilkan detail monster (1/2/dst/Back): ')
-          if mons_Number != 'Back' :
+          if mons_Number.lower() != 'back' :
             mons_Number = int(mons_Number)
             print('MONSTER')
             for i in range (1, len(monsData)):
@@ -132,5 +132,8 @@ def inventory (monsId, monsData, potData, monsLevel, access, oc):
                 print(f'Level     : {monsLevel[mons_Number-1]}')
           else :
             break
+      elif check.lower() == 'back' :
+        break      
 
-# contoh penggunaan function : inventory(monster_Id(3, mons_Inv_Data), monster_Data, pot_List(pot_Inventory(3, pot_Inv_Data)),monster_Lv(3, mons_Inv_Data), check_Admin(3, user_Data), owca_Coin(3, user_Data))
+# contoh penggunaan function : 
+inventory(monster_Id(3, mons_Inv_Data), monster_Data, pot_List(pot_Inventory(3, pot_Inv_Data)),monster_Lv(3, mons_Inv_Data), check_Admin(3, user_Data), owca_Coin(3, user_Data))
