@@ -1,0 +1,16 @@
+user_id;type;quantity
+1;strength potion;10
+1;resilience potion ;5
+1;healing;10
+2;strength potion;5
+2;resilience potion ;0
+2;healing;15
+3;strength potion;10
+3;resilience potion ;3
+3;healing;5
+4;strength potion;5
+4;resilience potion ;3
+4;healing;1
+5;strength potion;1
+5;resilience potion ;5
+5;healing;5
