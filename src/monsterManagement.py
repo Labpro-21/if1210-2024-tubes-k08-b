@@ -1,4 +1,4 @@
-from csvParser import splitSemicolonInt, csvReadInt, csvWrite
+from csvParser import *
 pathFileMonster = r"C:\Files\if1210-2024-tubes-k08-b\data\monster.csv"
 listMonster = csvReadInt(pathFileMonster)
 
@@ -73,7 +73,6 @@ def checkUserInput(userInput, nType, nAttack , nDefense, nHp):
     while True:
         if userInput == "Y" :
             # disini masukkan file ke csv dulu karena bila append terlebih dahulu len(listMonster) id akan tidak sesuai pada file monster.csv
-            csvWrite(pathFileMonster, f"{len(listMonster)};{nType};{nAttack};{nDefense};{nHp}")
             listMonster.append([len(listMonster), nType, nAttack, nDefense, nHp])
             print("Monster berhasil ditambahkan")
             break
@@ -84,7 +83,7 @@ def checkUserInput(userInput, nType, nAttack , nDefense, nHp):
             print("input tidak valid, hanya menerima input Y/N")
             userInput = str(input("(Y/N): "))
 def validUserInput(userInput, nType, nAttack, nDefense, nHp):
-    userInput = str(input("(Y/N): "))
+    userInput = str(input("Apakah mau tambahkan monster? (Y/N): ")
     return checkUserInput(userInput, nType, nAttack, nDefense, nHp)
 
 # FUNGSI PENAMBAHAN MONSTER BARU SECARA KESELURUHAN
