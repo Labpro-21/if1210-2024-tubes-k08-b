@@ -51,12 +51,18 @@ def csvDelete(path, row):                                                  # Fun
     tempData = []                                                          # Data sementara
     count = 0
     for i in csvOpen:
+        if count == row:                                                   # Pada baris yang ditentukan, data dilewat
+            continue
         tempData.append(i)                                                 # Mengisi list dengan data tanpa menghilangkan semicolon (";")
-        if count == row:                                                   # Pada baris yang ditentukan, data di-pop (dihapus)
-            tempData.pop(row)
         count += 1
     
     with open(path,'w') as csvWrite:                                       # Mengembalikan bentuk list menjadi bentuk csv semula
         for rows in tempData:
             tempData = csvWrite.write(''.join(rows))
+    return
+
+def csvWriteAll(path,newList):                                             # Fungsi mengupdate csv lama dengan data-data list terbaru
+    with open(path,'w') as csvWrite:                                       
+        for rows in newList:
+            csvWrite.write(''.join(rows))
     return
