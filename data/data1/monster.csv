@@ -1,6 +1,7 @@
 id,type,atk_power,def_power,hp
-1,Godzilla,170,40,600
-2,Mimic,100,5,150
-3,Makima,300,25,350
-4,Jalangkung,100,10,600
-5,gigidi gigididuu,100,10,100
+1,Godzilla,60,35,540
+2,Mimic,45,25,600
+3,Makima,135,15,250
+4,Jalangkung,50,20,580
+5,gigidi gigididuu,25,10,800
+6,Gorlock the Destroyer,150,40,1700
