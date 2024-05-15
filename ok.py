@@ -1,0 +1,10 @@
+list=[1,2,3,4,5]
+k=list[0]
+m=list[1]
+n=list[2]
+list2=[k,m,n]
+print(list)
+print(list2)
+list2[0]=list2[0]+1
+print(list)
+print(list2)

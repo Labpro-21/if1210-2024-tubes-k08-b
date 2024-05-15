@@ -1,21 +1,12 @@
-from csvParser import csvRead, csvWrite, csvOverwrite, csvDelete, csvWriteAll
-pathItemShop = "C:\if1210-2024-tubes-k08-b\data\item_shop.csv"
+'''from csvParser import splitSemicolon, csvRead, csvWrite, csvOverwrite, csvDelete'''
+'''pathItemShop = "C:\if1210-2024-tubes-k08-b\data\item_shop.csv"
 potionList = csvRead(pathItemShop)
-potionID = ["Type", "Strength Potion", "Resilience Potion", "Healing Potion"]
-def shopInterface():
-    print(" ▀▄▀▄▀▄  SHOP  ▄▀▄▀▄▀    ▂███████▂   _____  ")
-    print(" |__∆|___|_∆_|_|_|∆|      ██ █ ██    |$___|  ")
-    print(" |___|__∆|___|_|∆|_|     ███▀▀▀███   __||_   ")
-    print(" |∆__|___|∆__|∆|_|_|      ███████   /_____\  ")
-    print(" |___|_∆_|___|_|∆|_|  ██████████████ KASIR ██")
-    print(" ===================  ███████████████████████")
-    return
+potionID = ["Type", "Strength Potion", "Resilience Potion", "Healing Potion"]'''
 
-def shopOpen(role):
+def shopOpen(role,potionshop,coin,userinventory,monsterdata,monstershop,yourmonsterdata,monsterinventory):
+    yourcoin=coin
     if role == "agent":
-        print("    ↤↤↤↤↤ SELAMAT DATANG DI SHOP!!! ↦↦↦↦↦")
-        print()
-        shopInterface()
+        print("Selamat datang di Shop!")
         print()
         keluar = False
         while keluar != True:
@@ -26,47 +17,84 @@ def shopOpen(role):
                 while lihat_pilih != "monster" and lihat_pilih != "potion" and lihatSelesai != True:
                     lihat_pilih = input(">>> Pilih antara monster/potion: ")
                 if lihat_pilih == "monster":
-                    print("monster")
+                    print("ID | Type\t| ATK Power\t| DEF Power\t| HP\t| Stok\t| Harga")
+                    for i in range(1,len(monstershop)): # Menampilkan setiap potion yang tersedia di Shop
+                        x=int(monstershop[i][0])
+                        print(f"{i}  | {monsterdata[x][1]}\t| {monsterdata[x][2]}\t\t| {monsterdata[x][3]}\t\t| {monsterdata[x][4]}\t| {monstershop[i][1]}\t| {monstershop[i][2]}")
                     lihatSelesai == True
-                    # monster_list()
                 elif lihat_pilih == "potion":
                     print("ID | Type\t\t| Stok\t| Harga")
-                    for i in range(1,len(potionList)): # Menampilkan setiap potion yang tersedia di Shop
-                        print(f"{i}  | {potionList[i][0]}\t| {potionList[i][1]}\t| {potionList[i][2]}")
+                    for i in range(1,len(potionshop)): # Menampilkan setiap potion yang tersedia di Shop
+                        print(f"{i}  | {potionshop[i][0]}\t| {potionshop[i][1]}\t| {potionshop[i][2]}")
                     lihatSelesai == True
             elif pilihMenu == "beli":
-                print("Jumlah O.W.C.A Coin-mu sekarang [jumlah].")
+                print(f"Jumlah O.W.C.A Coin-mu sekarang {yourcoin}.")
                 print()
                 beliType = input(">>> Mau beli apa? (monster/potion): ")
                 beliSelesai = False
                 while beliType != "monster" and beliType != "potion" and beliSelesai != True:
                     beliType = input(">>> Pilih antara monster/potion: ")
                 if beliType == "monster":
-                    idMonsterBeli = input(">>> Masukkan id monster: ")
-                    # if monster in inventory:
-                    # print("[nama monster] sudah ada dalam inventory-mu! Pembelian dibatalkan.")
+                    while True :
+                        r=0
+                        idMonsterBeli = int(input(">>> Masukkan id monster: "))
+                        for i in yourmonsterdata :
+                            if monsterdata[idMonsterBeli][1]==i[1] :
+                                print("Monster sudah dimiliki")
+                                break
+                        else : 
+                            for i in monstershop :
+                                if i[0]==str(idMonsterBeli) :
+                                    if yourcoin >= int(i[2]) :
+                                        print("monster berhasil ditambahkan")
+                                        yourcoin-= int(i[2])
+                                        yourmonsterdata.append([userinventory[0][0],monsterdata[idMonsterBeli][1],'1'])
+                                        monsterinventory.append([userinventory[0][0],monsterdata[idMonsterBeli][1],'1'])
+                                        x=0
+                                        for i in monstershop :
+                                            if i[0]==str(idMonsterBeli) :
+                                                monstershop[x][1]=str(int(monstershop[x][1])-1)
+                                                break
+                                            x+=1
+                                        r=1
+                                        break
+                                    else :
+                                        print("maaf coin mu kurang")
+                                        break
+                        if r==1 : break
                     # if OWCA >= harga monster:
-                    print("Berhasil membeli item: [nama monster]. Item sudah masuk ke inventory-mu!")
                     print()
                     beliSelesai == True
-                    # Di sini ntar masukkin monster ke inventory, sama stok di toko ngurang 1 (harus ada database dulu), sama OWCA ngurang
-                    # else:
-                    # print("OC-mu tidak cukup.")
                 elif beliType == "potion":
-                    idPotionBeli = input(">>> Masukkan id potion: ")
-                    jumlahPotionBeli = input(">>> Masukkan jumlah: ")
-                    # if OWCA >= jumlah x potion:
-                    print("Berhasil membeli item: [jumlah potion] [nama potion]. Item sudah masuk ke inventory-mu!")
-                    print()
+                    idPotion = int(input(">>> Masukkan id potion: "))
+                    while True :
+                        jumlahPotionBeli = int(input(">>> Masukkan jumlah: "))
+                        if int(potionshop[idPotion][1]) >0 :
+                            if jumlahPotionBeli>int(potionshop[idPotion][1]):
+                                print("Stock tidak cukup")
+                            else : 
+                                if yourcoin >= (jumlahPotionBeli * int(potionshop[idPotion][2])):
+                                    print(f"Berhasil membeli item: {jumlahPotionBeli} {potionshop[idPotion][0]}. Item sudah masuk ke inventory-mu!")
+                                    print()
+                                    userinventory[idPotion-1][2]=str(int(userinventory[idPotion-1][2])+jumlahPotionBeli)
+                                    print(userinventory)
+                                    yourcoin-=(jumlahPotionBeli * int(potionshop[idPotion][2]))
+                                    potionshop[idPotion][1]=str(int(potionshop[idPotion][1])-jumlahPotionBeli)
+                                    break
+                                else :
+                                    print("maaf coin mu kurang")
+                        else :
+                            print("Stock habis!")
+                            break
+
                     beliSelesai == True
             else: # pilihMenu == "keluar"
                 keluar == True
                 print("Terima kasih sudah berkunjung. Sampai bertemu lagi!")
                 break
-    elif role == "admin":
-        print("   ↤↤↤↤ SELAMAT DATANG KEMBALI ADMIN! ↦↦↦↦")
-        print()
-        shopInterface()
+    return yourcoin
+    '''elif role == "admin":
+        print("Selamat datang kembali, Admin!")
         print()
         keluar = False
         while keluar != True:
@@ -201,8 +229,8 @@ def shopOpen(role):
             else: # pilihMenu == "keluar"
                 keluar == True
                 print("Sampai bertemu lagi Admin!")
-                break
+                break'''
     return
 
 # shopOpen("agent")
-shopOpen("admin")
+# shopOpen("admin")
