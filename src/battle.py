@@ -45,9 +45,9 @@ def battle(monsterdata,yourmonsterdata,userinventory,chosen,random_number) :
             break
         x+=1
     
-    yourattack = int(file1[x][2]) + (int(level)-1)*(5/100)*int(file1[x][2])
-    yourdefense = int(file1[x][3]) + (int(level)-1)*(5/100)*int(file1[x][3])
-    yourhealth = int(file1[x][4]) + (int(level)-1)*(5/100)*int(file1[x][4])
+    yourattack = int(file1[x][2]) + (int(level)-1)*(10/100)*int(file1[x][2])
+    yourdefense = int(file1[x][3]) + (int(level)-1)*(10/100)*int(file1[x][3])
+    yourhealth = int(file1[x][4]) + (int(level)-1)*(10/100)*int(file1[x][4])
     
     
     enemyhealth = int(file1[random_number][4])
