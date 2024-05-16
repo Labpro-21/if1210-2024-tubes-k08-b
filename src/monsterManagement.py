@@ -83,7 +83,7 @@ def checkUserInput(userInput, nType, nAttack , nDefense, nHp):
             print("input tidak valid, hanya menerima input Y/N")
             userInput = str(input("(Y/N): "))
 def validUserInput(userInput, nType, nAttack, nDefense, nHp):
-    userInput = str(input("Apakah mau tambahkan monster? (Y/N): ")
+    userInput = str(input("Apakah mau tambahkan monster? (Y/N): "))
     return checkUserInput(userInput, nType, nAttack, nDefense, nHp)
 
 # FUNGSI PENAMBAHAN MONSTER BARU SECARA KESELURUHAN

@@ -1,8 +1,8 @@
-id,monster,level 
-1,Mimic,1
-1,Makima,2
-1,Jalangkung,3
-2,Makima,1
-2,Mimic,1
-3,Jalangkung,2
-3,Mimic,1
+id;monster;level 
+1;Mimic;1
+1;Makima;2
+1;Jalangkung;3
+2;Makima;1
+2;Mimic;1
+3;Jalangkung;2
+3;Mimic;1
