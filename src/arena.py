@@ -1,7 +1,7 @@
 from battle import *
 from RandomNumberGenerator import *
 
-def arena(monsterdata,yourmonsterdata,userinventory) :
+def arena(monsterdata,monsterinventory,yourmonsterdata,userinventory) :
 
     coins=0
 
@@ -23,8 +23,9 @@ def arena(monsterdata,yourmonsterdata,userinventory) :
 
         for i in range(5) :
             random_number = RNG(1,5)
+            random_level = RNG(1,5)
             opening(monsterdata,random_number)
-            coin = battle(monsterdata,yourmonsterdata,userinventory,chosen,random_number)
+            coin = battle(monsterdata,monsterinventory,yourmonsterdata,userinventory,chosen,random_number,random_level,'arena')
             coins += coin
             if coin==0 :
                 print(f"YOU MADE IT TO STAGE NUMBER {i+1}, KEEP IMPROVING")
@@ -36,3 +37,4 @@ def arena(monsterdata,yourmonsterdata,userinventory) :
             coins += 50
         print(f"YOUR TOTAL COIN GAINED FROM THE ARENA : {coins}")
     return coins
+

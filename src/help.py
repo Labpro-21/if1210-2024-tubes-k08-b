@@ -20,6 +20,16 @@ def help(status,role) :
             print("   Tempat jual beli potion dan monster")
             print("4. Inventory")
             print("   Cek semua item dan monster anda")
-            print("5. Logout")
+            print("5. Laboratory")
+            print("   Tempat untuk meng-upgrade monster anda")
+            print("6. Logout")
+            print("   Keluar dari akun anda")
+        if role == 'admin' :
+            print("List command yang dapat anda lakukan :")
+            print("1. Shop")
+            print("   Manage shop")
+            print("2. Monster")
+            print("   Manage monster")
+            print("3. Logout")
             print("   Keluar dari akun anda")
             

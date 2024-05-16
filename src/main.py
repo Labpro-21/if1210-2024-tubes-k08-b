@@ -3,9 +3,10 @@ from battle import *
 from arena import*
 from RandomNumberGenerator import *
 from inventory import *
-from shop_currency import *
+from shopCurrency import *
 from help import *
 from laboratory import *
+import time
 
 data=load()
 if data != [] :
@@ -38,14 +39,16 @@ if data != [] :
                     command = input("--->")
                     if command == 'battle' :
                         random_number = RNG(1,5)
+                        time.sleep(2/10)
+                        random_level = RNG(1,5)
                         opening(monster,random_number)
                         chosen=choose(yourmonsterinventory)
-                        coin = battle(monster,yourmonsterinventory,userinventory,chosen,random_number)
+                        coin = battle(monster,monsterinventory,yourmonsterinventory,userinventory,chosen,random_number,random_level,'battle')
                         coins+=coin
                         user[id][4]=str(coins)
                         print(userinventory)
                     elif command == 'arena' :
-                        coin = arena(monster,yourmonsterinventory,userinventory)
+                        coin = arena(monster,monsterinventory,yourmonsterinventory,userinventory)
                         coins+=coin
                         user[id][4]=str(coins)
                     elif command == 'inventory' :
@@ -65,7 +68,6 @@ if data != [] :
                         if t==1 :
                                 loginstatus=False
                                 break
-
                     elif command == 'Shop' :
                         coins=shopOpen(role,itemshop,coins,userinventory,monster,monstershop,yourmonsterinventory,monsterinventory)
                         user[id][4]=str(coins)
@@ -83,4 +85,25 @@ if data != [] :
                         print(yourmonsterinventory)
                         print(itemshop)
                         print(monstershop)
-                    
+            elif role=='admin' :
+                while True :
+                    command = input("--->")
+                    if command=='help':
+                        help(loginstatus,role)
+                    elif command=='shop':
+                        shopmanagement(itemshop,monstershop,monster)
+                    elif command == 'logout' :
+                        t=0
+                        while True :
+                            confirm = input("Apakah anda yakin untuk logout?(Y/N)-->")
+                            if confirm == "Y" :
+                                print("Logout berhasil")
+                                t=1
+                                break
+                            elif confirm =='N' :
+                                t=1
+                                break
+                            else : print("mangsud?")
+                        if t==1 :
+                                loginstatus=False
+                                break

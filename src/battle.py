@@ -1,8 +1,6 @@
-import random
-
-from readwritecsv import * 
 from potion import *
 from RandomNumberGenerator import *
+from monsterball import *
 
 def choose(yourmonsterdata) :
     while True :
@@ -28,7 +26,7 @@ def opening(monsterdata,random_number) :
     name = monsterdata[random_number][1]
     print(f'{name} telah datang !!!!!!!!!!!')
    
-def battle(monsterdata,yourmonsterdata,userinventory,chosen,random_number) :
+def battle(monsterdata,monsterinventory,yourmonsterdata,userinventory,chosen,random_number,random_level,type) :
     file1 = monsterdata
     file2 = yourmonsterdata
 
@@ -50,9 +48,9 @@ def battle(monsterdata,yourmonsterdata,userinventory,chosen,random_number) :
     yourhealth = int(file1[x][4]) + (int(level)-1)*(10/100)*int(file1[x][4])
     
     
-    enemyhealth = int(file1[random_number][4])
-    enemyattack = int(file1[random_number][2])
-    enemydefense = int(file1[random_number][3])
+    enemyhealth = int(file1[random_number][4]) + (random_level-1)*(10/100)*int(file1[random_number][4])
+    enemyattack = int(file1[random_number][2]) + (random_level-1)*(10/100)*int(file1[random_number][2])
+    enemydefense = int(file1[random_number][3]) + (random_level-1)*(10/100)*int(file1[random_number][3])
     '''yourhealth = int(file2[chosen][2])+(5/100)*(int(file2[chosen][5])-1)*int(file2[chosen][2])
     yourattack = int(file2[chosen][3])+(5/100)*(int(file2[chosen][5])-1)*int(file2[chosen][3])
     yourdefense = int(file2[chosen][4])+(5/100)*(int(file2[chosen][5])-1)*int(file2[chosen][4])
@@ -75,7 +73,11 @@ def battle(monsterdata,yourmonsterdata,userinventory,chosen,random_number) :
         print("CHOOSE AN ACTION :")
         print("1. ATTACK")
         print("2. DRINK POTION")
-        print("3. QUIT")
+        if type=='battle' :
+            print("3. MONSTER BALL ")
+            print("4. QUIT")
+        elif type=='arena' :
+            print("3. QUIT")
         print("=====================")
         action = int(input("-------->"))
         if action==1 :
@@ -120,16 +122,30 @@ def battle(monsterdata,yourmonsterdata,userinventory,chosen,random_number) :
                 continue
 
         elif action==3 :
-            coin = 0
-            return coin
-            break
+            if type =='battle' :
+                success = monsterball(random_number,random_level,userinventory,monsterdata,monsterinventory,yourmonsterdata)
+                if success==1 :
+                    return 0
+                elif success ==2 :
+                    continue
+            elif type =='arena':
+                coin = 0
+                return coin
+                break
+        elif action==4 :
+            if type=='arena' :
+                print("opsi 4 tidak ada")
+            elif type=='battle' :
+                coin = 0
+                return coin
+                break
 
         if enemyhealth <= 0 : 
             print("="*100)
             print("YOU DEFEATED YOUR ENEMY")
             print("WOHOOOOOO")
             print("="*100)
-            coin = random.randint(50,100)
+            coin = RNG(50,100)
             print(f"YEEEEEY YOU GOT {coin} coin")
             return coin
             break

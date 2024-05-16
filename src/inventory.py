@@ -93,17 +93,19 @@ def inventoryy(userinventory,yourmonsterdata,monsterdata,role,coin) :
     else :
         print(f'jumlah OWCA coin anda saat ini : {coin}')
         while True :
-            check = input('Silakan pilih jenis item yang ingin diketahui Anda (Monster/Potion/Back): ')
-            if check.lower() == 'potion' :
+            check = input('Silakan pilih jenis item yang ingin diketahui Anda (Monster/Item/Back): ')
+            if check.lower() == 'item' :
                 x=1
                 types=[]
                 for i in userinventory:
                     if i[1] == 'strenghpotion' :
-                        type = 'ATK'
-                    if i[1] == 'respotion' :
-                        type = 'DEF'
-                    if i[1] == 'healingpotion' :
-                        type = 'HEAL'
+                        type = 'ATK potion'
+                    elif i[1] == 'respotion' :
+                        type = 'DEF potion'
+                    elif i[1] == 'healingpotion' :
+                        type = 'HEAL potion'
+                    elif i[1] == 'monsterball' :
+                        type = 'MONSTER BALL'
                     types.append(type)
                     print(f'{x}. Type: {type}')
                     x+=1
@@ -111,7 +113,6 @@ def inventoryy(userinventory,yourmonsterdata,monsterdata,role,coin) :
                     pot_Number = input('Masukkan nomor potion untuk menampilkan detail item (1/2/3/Back): ')
                     if pot_Number.lower() != 'back':
                         pot_Number = int(pot_Number)
-                        print('POTION')
                         print(f'Type: {types[pot_Number-1]}')
                         print(f'Quantity: {userinventory[pot_Number-1][2]}')
                     else :

@@ -1,18 +1,16 @@
-from readwritecsv import *
-
 def jumlahpot(userinventory) :
   for i in userinventory :
-    if i[1]=='strenghpotion' :
+    if i[1]=='Strength Potion' :
       jumlahstr = i[2]
       break
   else : jumlahstr = 0
   for i in userinventory :
-    if i[1]=='respotion' :
+    if i[1]=='Resilience Potion' :
       jumlahres = i[2]
       break
   else : jumlahres = 0
   for i in userinventory :
-    if i[1]=='healingpotion' :
+    if i[1]=='Healing Potion' :
       jumlahheal = i[2]
       break
   else : jumlahheal = 0
@@ -21,19 +19,19 @@ def jumlahpot(userinventory) :
 def lokasipot(userinventory) :
   x=0
   for i in userinventory :
-    if i[1]=='strenghpotion' :
+    if i[1]=='Strength Potion' :
       break
     x+=1
   else : x=999
   y=0
   for i in userinventory :
-    if i[1]=='respotion' :
+    if i[1]=='Resilience Potion' :
       break
     y+=1
   else : y=999
   z=0
   for i in userinventory :
-    if i[1]=='healingpotion' :
+    if i[1]=='Healing Potion' :
       break
     z+=1
   else : x=999

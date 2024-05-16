@@ -13,12 +13,12 @@ def load() :
     elif(os.path.exists(path)): # jika folder ditemukan
         print("Loading...")
         print("Selamat datang")
-        user = read_csv("data/data1/user.csv")
-        inventory = read_csv("data/data1/item_inventory.csv")
-        monster = read_csv("data/data1/monster.csv")
-        monsterinventory = read_csv("data/data1/monser_inventory.csv")
-        itemshop=read_csv("data/data1/item_shop.csv")
-        monstershop=read_csv("data/data1/monster_shop.csv")
+        user = read_csv(path+"/user.csv")
+        inventory = read_csv(path+"/item_inventory.csv")
+        monster = read_csv(path+"/monster.csv")
+        monsterinventory = read_csv(path+"/monser_inventory.csv")
+        itemshop=read_csv(path+"/item_shop.csv")
+        monstershop=read_csv(path+"/monster_shop.csv")
         return [user,inventory,monster,monsterinventory,itemshop,monstershop]
     else: # folder tidak ditemukan
         print(f"Folder \"{path}\" tidak ditemukan.")
@@ -30,17 +30,20 @@ def login(user,inventory,monsterinventory) :
     for i in user :
         if i[1] == username :
             if i[2] == password :
-                player_inventory = []
-                monster_inventory =[]
-                print("login berhasil")
-                for j in inventory :
-                    if j[0]==i[0] :
-                        player_inventory.append(j)
-                for j in monsterinventory :
-                    if j[0]==i[0] :
-                        monster_inventory.append(j)
-                return player_inventory,monster_inventory,i[3],int(i[4])
-                break
+                if i[3] =='agent' :
+                    player_inventory = []
+                    monster_inventory =[]
+                    print("login berhasil")
+                    for j in inventory :
+                        if j[0]==i[0] :
+                            player_inventory.append(j)
+                    for j in monsterinventory :
+                        if j[0]==i[0] :
+                            monster_inventory.append(j)
+                    return player_inventory,monster_inventory,i[3],int(i[4])
+                    break
+                elif i[3] =='admin' :
+                    return 1,1,i[3],1
             else :
                 print("password salah")
                 return 0,0,0,0
@@ -82,57 +85,6 @@ def register(user,inventory,monsterinventory,monster) :
     return player_inventory,monster_inventory,'agent',0
 
 
-def buang(data,inventory) :
-    print("mau buang item apa ?")
-    inp = input("(1(str)/2(res)/3(heal))? ------->")
-    if inp == '1' :
-        for i in data :
-            if i[1]=='strenghpotion' :
-                if int(i[2]) >0 :
-                    i[2]=str(int(i[2])-1)
-                    print("strenght potion dibuang satu")
-                    break
-                else :
-                    print("anda tidak memiliki str potion")
-                    break
-        else :
-            print("anda tidak memiliki strenght potion")
-    elif inp == '2' :
-        for i in data :
-            if i[1]=='respotion' :
-                if int(i[2])>0 :
-                    i[2]=str(int(i[2])-1)
-                    print("resistance potion dibuang satu")
-                    break
-                else :
-                    print("anda tidak memiliki res potion")
-                    break
-        else :
-            print("anda tidak memiliki resistance potion")
-    elif inp == '3' :
-        for i in data :
-            if i[1]=='healingpotion' :
-                if int(i[2]) > 0 :
-                    i[2]=str(int(i[2])-1)
-                    print("heal potion dibuang satu")
-                    break
-                else :
-                    print("anda tidak memiliki heal potion")
-                    break
-        else :
-            print("anda tidak memiliki heal potion")
-    x=0
-    idx=[]
-    for i in inventory :
-        print(f"{i[0]} DAN {data[0][0]}")
-        if i[0]==data[0][0] :
-            idx.append(x)
-        x+=1
-    for i in range(len(idx)-1,-1,-1) :
-        inventory.pop(idx[i])
-    for i in data :
-        inventory.append(i)
-
            
 def write(path,data) :
     # Writing data to the CSV file
@@ -150,4 +102,3 @@ def save(inventory,monster,user) :
         write(path+"/inventory.csv",inventory)
         write(path+"user.csv",user)
         write(path+"/monster.csv",monster)
-    

@@ -4,7 +4,7 @@ def read_csv(path) :
     data =[]
     with open(path) as file :
             for char in file.read():
-                if char == ',':
+                if char == ';':
                     row.append(field)
                     field=''
                 elif char=="\n" :
