@@ -49,7 +49,13 @@ def monsterball(monsterid,monsterlevel,userinventory,monsterdata,monsterinventor
     else : # Player tidak memiliki monster ball
         print('Anda tidak memiliki monster ball')
         success = 2
+<<<<<<< HEAD
     if success==1 : # success = 1 berarti monster success ditangkap dan monster ditambah ke inventory player
         yourmonsterdata.append([userinventory[0][0],monsterdata[monsterid][1],monsterlevel])
         monsterinventory.append([userinventory[0][0],monsterdata[monsterid][1],monsterlevel])
+=======
+    if success==1 :
+        yourmonsterdata.append([userinventory[0][0],monsterdata[monsterid][1],str(monsterlevel)])
+        monsterinventory.append([userinventory[0][0],monsterdata[monsterid][1],str(monsterlevel)])
+>>>>>>> 16d82a0db21ccab37049e91ab4bae49f847ba5c2
     return success

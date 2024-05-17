@@ -1,4 +1,5 @@
 from readwritecsv import *
+from csvParser import *
 import os
 import argparse
 def load() :
@@ -94,11 +95,24 @@ def write(path,data) :
 
     print(f"CSV file '{path}' has been created successfully.")
 
-def save(inventory,monster,user) :
+def save(inventory,monster,user,monstershop,itemshop,monsterinventory) :
     # ALGORITMA
     path = "data/" + input("Masukkan nama folder: ")
     print("Saving...")
     if (os.path.exists(path)) :
-        write(path+"/inventory.csv",inventory)
-        write(path+"user.csv",user)
-        write(path+"/monster.csv",monster)
+        write_csv(path+"/inventory.csv",inventory)
+        write_csv(path+"/user.csv",user)
+        write_csv(path+"/monster.csv",monster)
+        write_csv(path+"/monster_shop.csv",monstershop)
+        write_csv(path+"/item_shop.csv",itemshop)
+        write_csv(path+"/monser_inventory",monsterinventory)
+    else :
+        os.mkdir(path)
+        write_csv(path+"/item_inventory.csv",inventory)
+        write_csv(path+"/user.csv",user)
+        write_csv(path+"/monster.csv",monster)
+        write_csv(path+"/monster_shop.csv",monstershop)
+        write_csv(path+"/item_shop.csv",itemshop)
+        write_csv(path+"/monser_inventory.csv",monsterinventory)
+
+

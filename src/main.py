@@ -8,6 +8,7 @@ from help import *
 from laboratory import *
 from jackpot import *
 import time
+from exit import *
 
 data=load()
 if data != [] :
@@ -31,6 +32,11 @@ if data != [] :
             loginstatus = True
         elif command.lower() == "help" :
             help(loginstatus,"belumlogin")
+        elif command.lower() == 'save' :
+            save(inventory,monster,user,monstershop,itemshop,monsterinventory)
+        elif command.lower()=='exit' :
+            exit(user,monsterinventory,itemshop,monster,monstershop,inventory)
+            break
         else :
             print(f"command '{command}' tidak ada.")
         if loginstatus==True :
@@ -94,7 +100,7 @@ if data != [] :
                     if command.lower() =='help':
                         help(loginstatus,role)
                     elif command.lower() =='shop':
-                        shopmanagement(itemshop,monstershop,monster)
+                        monstershop,itemshop=shopmanagement(itemshop,monstershop,monster)
                     elif command.lower() == 'logout' :
                         t=0
                         while True :
@@ -110,3 +116,5 @@ if data != [] :
                         if t==1 :
                                 loginstatus=False
                                 break
+                    else :
+                        print("apansih")
