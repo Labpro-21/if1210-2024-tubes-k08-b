@@ -189,3 +189,4 @@ SELAMAT DATANG DI DATABASE PARA MONSTER !!!
             print("Input tidak valid, input yang diterima hanya 0/1/2")
 
 # PENERAPAN FUNGSI
+# monsterManagement()
