@@ -13,7 +13,8 @@ def cekrng(RNG) :
         item = 4
     return item
 
-def gacha() :
+def gacha(yourcoin) :
+    yourcoin = int(yourcoin)
     icon = ['TOPI', 'PEDANG', 'BAJU', 'CELANA', 'JAM' ]
     value = [50,100,150,200,250,400]
     RNG1 = RNG(1,100)
@@ -26,23 +27,34 @@ def gacha() :
     item3 = cekrng(RNG3)
     totalcoin = value[item1]+value[item2]+value[item3]
     print(f"{icon[item1]} | {icon[item2]} | {icon[item3]}")
-    if item1==item2 and item2==item3 :
-        print('s')
-    else :
-        print(f"ANDA TIDAK DAPAT GORLOCK, TAPI ANDA DAPAT {totalcoin} COINS !!!")
+    prize = False
+    if prize == False :
+        if item1==item2 and item2==item3 :
+            print('SELAMATT!! ANDA MENDAPATKAN GORLOCK THE DESTROYER! DESTROY EVERYTHING!')
+            prize == True
+        else :
+            print(f"ANDA TIDAK DAPAT JACKPOT, TAPI ANDA DAPAT {totalcoin} COINS !!!")
+            yourcoin += totalcoin
+    elif prize == True :
+        if item1==item2 and item2==item3 :
+            print('SELAMATT!! GORLOCK SUDAH ANDA MILIKI, GORLOCK AKAN DIUBAH KE O.W.C.A Coin sebanyak 1000 Coin')
+            yourcoin += 1000
+        else :
+            print(f"ANDA TIDAK DAPAT JACKPOT, TAPI ANDA DAPAT {totalcoin} COINS !!!")
+            yourcoin += totalcoin
 
 def jackpot(yourcoin) :
     coin=yourcoin
-    print("SELAMAT DATANG DIJACKPOT 888!!!")
-    print("APAKAH ANDA INGIN MENCOBA KEBERUNTUNGAN ANDA???")
+    print("SELAMAT DATANG DI JACKPOT 888!!!")
     print("ANDA DAPAT MENDAPATKAN GORLOCK THE DESTROYER DENGAN HARGA 400 COIN")
+    print("APAKAH ANDA INGIN MENCOBA KEBERUNTUNGAN ANDA???")
     while True :
         inp = input("(Y/N)----->")
         if inp == 'Y' :
             confirm = input("APAKAH ANDA YAKIN? (Y/N) :")
             if confirm == 'Y' :
-                if coin>=400 :
-                    gacha()
+                if coin >= 400 :
+                    gacha(yourcoin)
                     coin-=400
                 else :
                     print("COIN TIDAK CUKUP")
