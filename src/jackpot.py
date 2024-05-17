@@ -50,12 +50,13 @@ def jackpot(yourcoin) :
     print("APAKAH ANDA INGIN MENCOBA KEBERUNTUNGAN ANDA???")
     while True :
         inp = input("(Y/N)----->")
-        if inp == 'Y' :
+        if inp.lower() == 'y' :
             confirm = input("APAKAH ANDA YAKIN? (Y/N) :")
-            if confirm == 'Y' :
+            if confirm.lower() == 'y' :
                 if coin >= 400 :
                     gacha(yourcoin)
                     coin-=400
+                    print("APAKAH ANDA INGIN MELANJUTKAN??",end=" ")
                 else :
                     print("COIN TIDAK CUKUP")
             else :
