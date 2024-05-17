@@ -125,10 +125,9 @@ def shopOpen(role,potionShop,coin,userinventory,monsterdata,monstershop,yourmons
                         else :
                             print("Stock Potion habis!")
                             break
-                break
             else: # pilihMenu == "keluar"
                 print(f"Sampai bertemu lagi, User!")
-                break
+                return yourcoin
 def shopmanagement(potionShop,monstershop,monsterdata)   :
         print("   ↤↤↤↤ SELAMAT DATANG KEMBALI ADMIN! ↦↦↦↦")
         print()
