@@ -21,10 +21,10 @@ def gacha(id, yourcoin,monsInv,yourmonsterinventory):
     RNG2 = RNG(1, 100)
     time.sleep(0.1)
     RNG3 = RNG(1, 100)
-
-    item1 = 1
-    item2 = 1
-    item3 = 1
+    
+    item1 = cekrng(RNG1)
+    item2 = cekrng(RNG2)
+    item3 = cekrng(RNG3)
     totalcoin = value[item1] + value[item2] + value[item3]
 
     print(f"{icon[item1]} | {icon[item2]} | {icon[item3]}")
