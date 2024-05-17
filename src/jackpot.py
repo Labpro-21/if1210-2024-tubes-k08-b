@@ -13,18 +13,18 @@ def cekrng(RNG):
     elif 96 <= RNG <= 100:
         return 4
 
-def gacha(id, yourcoin, monsInv):
+def gacha(id, yourcoin,monsInv,yourmonsterinventory):
     icon = ['TOPI', 'PEDANG', 'BAJU', 'CELANA', 'JAM']
-    value = [50, 100, 150, 200, 250, 400]
+    value = [30, 60, 80, 120, 170, 300]
     RNG1 = RNG(1, 100)
     time.sleep(0.2)
     RNG2 = RNG(1, 100)
     time.sleep(0.1)
     RNG3 = RNG(1, 100)
 
-    item1 = cekrng(RNG1)
-    item2 = cekrng(RNG2)
-    item3 = cekrng(RNG3)
+    item1 = 1
+    item2 = 1
+    item3 = 1
     totalcoin = value[item1] + value[item2] + value[item3]
 
     print(f"{icon[item1]} | {icon[item2]} | {icon[item3]}")
@@ -35,14 +35,15 @@ def gacha(id, yourcoin, monsInv):
             print('SELAMAT!! GORLOCK SUDAH ANDA MILIKI, GORLOCK AKAN DIUBAH KE O.W.C.A Coin sebanyak 1000 Coin')
             yourcoin += 1000
         else:
-            monsInv.append([id, "Gorlock", 1])
+            monsInv.append([str(id),"Gorlock",'1'])
+            yourmonsterinventory.append([str(id),"Gorlock",'1'])
     else:
         print(f"ANDA TIDAK DAPAT JACKPOT, TAPI ANDA DAPAT {totalcoin} COIN !!!")
         yourcoin += totalcoin
 
     return yourcoin
 
-def jackpot(id, yourcoin, monsInv):
+def jackpot(id, yourcoin, monsInv,yourmonsterinventory):
     yourcoin = int(yourcoin)
     print("SELAMAT DATANG DI JACKPOT 888!!!")
     print("ANDA DAPAT MENDAPATKAN GORLOCK THE DESTROYER DENGAN HARGA 500 COIN")
@@ -55,7 +56,7 @@ def jackpot(id, yourcoin, monsInv):
             confirm = input("APAKAH ANDA YAKIN? (Y/N) :").lower()
             if confirm == 'y':
                 if yourcoin >= 500:
-                    yourcoin = gacha(id, yourcoin, monsInv)
+                    yourcoin = gacha(id, yourcoin, monsInv,yourmonsterinventory)
                     yourcoin -= 500
                     print(f'COIN ANDA TERSISA {yourcoin}')
                     print("APAKAH ANDA INGIN MELANJUTKAN??", end=" ")

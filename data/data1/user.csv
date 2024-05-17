@@ -1,5 +1,5 @@
 id;username;password;role;coin
-1;bagas;12345;agent;1000
+1;bagas;12345;agent;100000000000
 2;bagus;12345;agent;100
 3;bages;12345;agent;100
 4;bagos;12345;agent;100

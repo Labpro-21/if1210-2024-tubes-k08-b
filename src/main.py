@@ -78,7 +78,7 @@ if data != [] :
                         coins = laboratory(yourmonsterinventory,monster,coins,role)
                         user[id][4]=str(coins)
                     elif command.lower() == 'jackpot' :
-                        jackpot(id, coins, monsterinventory)
+                        jackpot(id,coins, monsterinventory,yourmonsterinventory)
                     else :
                         print(f"command '{command}' tidak ada.")
                         print(userinventory)
