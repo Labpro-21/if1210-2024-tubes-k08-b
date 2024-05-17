@@ -90,7 +90,7 @@ def checkUserInput(listMonster,userInput, nType, nAttack , nDefense, nHp):
     while True:
         if userInput == "Y" :
             # disini masukkan file ke csv dulu karena bila append terlebih dahulu len(listMonster) id akan tidak sesuai pada file monster.csv
-            listMonster.append([len(listMonster), nType, nAttack, nDefense, nHp])
+            listMonster.append([str(len(listMonster)), nType, str(nAttack), str(nDefense), str(nHp)])
             print("Monster berhasil ditambahkan")
             break
         elif userInput == "N" :
@@ -102,7 +102,7 @@ def checkUserInput(listMonster,userInput, nType, nAttack , nDefense, nHp):
 
 def validUserInput(listMonster,userInput, nType, nAttack, nDefense, nHp):
     userInput = str(input("Apakah mau tambahkan monster? (Y/N): "))
-    return checkUserInput(listMonster,userInput, nType, nAttack, nDefense, nHp)
+    checkUserInput(listMonster,userInput, nType, nAttack, nDefense, nHp)
 
 # FUNGSI PENAMBAHAN MONSTER BARU SECARA KESELURUHAN
 def newMonster(listMonster):
@@ -112,7 +112,6 @@ def newMonster(listMonster):
     nHp = newHp()
     userInput = ""
     validUserInput(listMonster,userInput, nType, nAttack, nDefense, nHp)
-    return
 
 # FUNGSI PENCETAKAN TABEL RAPIH
 # Fungsi mengubah elemen integer pada list dari data csv menjadi string karena nanti akan digunakan fungsi len()
