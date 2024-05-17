@@ -100,7 +100,7 @@ if data != [] :
                     if command.lower() =='help':
                         help(loginstatus,role)
                     elif command.lower() =='shop':
-                        shopmanagement(itemshop,monstershop,monster)
+                        monstershop,itemshop=shopmanagement(itemshop,monstershop,monster)
                     elif command.lower() == 'logout' :
                         t=0
                         while True :
@@ -116,3 +116,5 @@ if data != [] :
                         if t==1 :
                                 loginstatus=False
                                 break
+                    else :
+                        print("apansih")
