@@ -9,6 +9,7 @@ from laboratory import *
 from jackpot import *
 import time
 from exit import *
+from monsterManagement import *
 
 data=load()
 if data != [] :
@@ -116,5 +117,7 @@ if data != [] :
                         if t==1 :
                                 loginstatus=False
                                 break
+                    elif command.lower() =='monster' :
+                        monsterManagement(monster)
                     else :
                         print("apansih")
