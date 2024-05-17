@@ -100,12 +100,12 @@ def save(inventory,monster,user,monstershop,itemshop,monsterinventory) :
     path = "data/" + input("Masukkan nama folder: ")
     print("Saving...")
     if (os.path.exists(path)) :
-        write_csv(path+"/inventory.csv",inventory)
+        write_csv(path+"/item_inventory.csv",inventory)
         write_csv(path+"/user.csv",user)
         write_csv(path+"/monster.csv",monster)
         write_csv(path+"/monster_shop.csv",monstershop)
         write_csv(path+"/item_shop.csv",itemshop)
-        write_csv(path+"/monser_inventory",monsterinventory)
+        write_csv(path+"/monser_inventory.csv",monsterinventory)
     else :
         os.mkdir(path)
         write_csv(path+"/item_inventory.csv",inventory)
