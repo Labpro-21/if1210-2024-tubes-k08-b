@@ -1,5 +1,5 @@
 from csvParser import *
-pathFileMonster = r"C:\Files\if1210-2024-tubes-k08-b\data\monster.csv"
+pathFileMonster = r"data\data1\monster.csv"
 listMonster = csvReadInt(pathFileMonster)
 
 # FUNGSI UNTUK PENAMBAHAN MONSTER
