@@ -78,7 +78,7 @@ if data != [] :
                         coins = laboratory(yourmonsterinventory,coins,role)
                         user[id][4]=str(coins)
                     elif command.lower() == 'jackpot' :
-                        jackpot(coins)
+                        jackpot(id, coins, monsterinventory)
                     else :
                         print(f"command '{command}' tidak ada.")
                         print(userinventory)
@@ -103,7 +103,7 @@ if data != [] :
                                 print("Logout berhasil")
                                 t=1
                                 break
-                            elif confirm.lower() =='n' :
+                            elif confirm.lower() =='n ' :
                                 t=1
                                 break
                             else : print("mangsud?")
