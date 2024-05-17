@@ -30,15 +30,20 @@ def monster_Lv (id, monsInvData):
       mons_Lv_Array.append(int(monsInvData[i][2]))
   return mons_Lv_Array'''
 
-def laboratory(yourmonsterdata,coin,role):
+def laboratory(yourmonsterdata,monsterdata,coin,role):
   if role == 'admin' :
     print('Maaf! Anda tidak memiliki akses sebagai admin')
   elif role == 'agent' :
     print(f'Jumlah O.W.C.A. Coin Anda saat ini : {coin}')
     print('============ MONSTER LIST ============')  
-    number = 0
     for i in yourmonsterdata :
-      print(f"{number+1}. {i[1]}, LEVEL :{i[2]}")
+      index=0
+      for j in monsterdata :
+         if j[1]==i[1] :
+            break
+         else :
+            index+=1
+      print(f"{index}. {i[1]}, LEVEL :{i[2]}")
     array_Harga = [100, 200, 400, 700]
     print('============ UPGRADE PRICE ============')
     for i in range (1,5):

@@ -22,7 +22,7 @@ def arena(monsterdata,monsterinventory,yourmonsterdata,userinventory) :
         chosen = choose(yourmonsterdata) 
 
         for i in range(5) :
-            random_number = RNG(1,5)
+            random_number = RNG(1,len(monsterdata))
             random_level = RNG(1,5)
             opening(monsterdata,random_number)
             coin = battle(monsterdata,monsterinventory,yourmonsterdata,userinventory,chosen,random_number,random_level,'arena')

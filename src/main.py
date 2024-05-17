@@ -39,7 +39,7 @@ if data != [] :
                     id = int(userinventory[0][0])
                     command = input("--->")
                     if command.lower() == 'battle' :
-                        random_number = RNG(1,5)
+                        random_number = RNG(1,len(monster))
                         time.sleep(2/10)
                         random_level = RNG(1,5)
                         opening(monster,random_number)
@@ -75,7 +75,7 @@ if data != [] :
                     elif command.lower() == 'help' :
                         help(loginstatus,role)
                     elif command.lower() == 'laboratory' :
-                        coins = laboratory(yourmonsterinventory,coins,role)
+                        coins = laboratory(yourmonsterinventory,monster,coins,role)
                         user[id][4]=str(coins)
                     elif command.lower() == 'jackpot' :
                         jackpot(coins)

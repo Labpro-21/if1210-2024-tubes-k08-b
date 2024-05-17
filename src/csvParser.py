@@ -28,6 +28,8 @@ def csvRead(path):                                                         # Fun
     csvOpen.close()                                                        # Menutup file
     return cleanData
 
+
+
 def splitSemicolonInt(text):                                                  
     separated = []
     word = ''

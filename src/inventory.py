@@ -98,13 +98,13 @@ def inventoryy(userinventory,yourmonsterdata,monsterdata,role,coin) :
                 x=1
                 types=[]
                 for i in userinventory:
-                    if i[1] == 'strenghpotion' :
+                    if i[1] == 'Strength Potion' :
                         type = 'ATK potion'
-                    elif i[1] == 'respotion' :
+                    elif i[1] == 'Resilience Potion' :
                         type = 'DEF potion'
-                    elif i[1] == 'healingpotion' :
+                    elif i[1] == 'Healing Potion' :
                         type = 'HEAL potion'
-                    elif i[1] == 'monsterball' :
+                    elif i[1] == 'Monster Ball' :
                         type = 'MONSTER BALL'
                     types.append(type)
                     print(f'{x}. Type: {type}')
