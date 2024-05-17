@@ -49,6 +49,6 @@ def monsterball(monsterid,monsterlevel,userinventory,monsterdata,monsterinventor
         print('Anda tidak memiliki monster ball')
         success = 2
     if success==1 :
-        yourmonsterdata.append([userinventory[0][0],monsterdata[monsterid][1],monsterlevel])
-        monsterinventory.append([userinventory[0][0],monsterdata[monsterid][1],monsterlevel])
+        yourmonsterdata.append([userinventory[0][0],monsterdata[monsterid][1],str(monsterlevel)])
+        monsterinventory.append([userinventory[0][0],monsterdata[monsterid][1],str(monsterlevel)])
     return success

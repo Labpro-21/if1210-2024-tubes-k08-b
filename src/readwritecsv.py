@@ -18,10 +18,12 @@ def read_csv(path) :
             data.append(row)
     return data
 
-'''def write_csv(filename, data):
+def write_csv(filename, data):
     with open(filename, 'w') as file:
-        for i in range(len(data)):
-            file.write(','.join(data[i]))
-            if i < len(data) - 1:  # Add newline if it's not the last row
-                file.write('\n')'''
-
+        for row_index, row in enumerate(data):
+            for item_index, item in enumerate(row):
+                file.write(item)
+                if item_index < len(row) - 1:
+                    file.write(';')
+            if row_index < len(data) - 1:
+                file.write('\n')

@@ -31,6 +31,8 @@ if data != [] :
             loginstatus = True
         elif command.lower() == "help" :
             help(loginstatus,"belumlogin")
+        elif command.lower() == 'save' :
+            save(inventory,monster,user,monstershop,itemshop,monsterinventory)
         else :
             print(f"command '{command}' tidak ada.")
         if loginstatus==True :
