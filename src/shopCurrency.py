@@ -169,7 +169,7 @@ def shopmanagement(potionShop,monstershop,monsterdata)   :
                 while tambah_pilih != "monster" and tambah_pilih != "potion":
                     tambah_pilih = (input(">>> Pilih antara monster/potion: "))
                 if tambah_pilih == "monster":
-                    print("ID | Type\t\t\t| ATK Power\t| DEF Power\t| HP\t|")
+                    print("ID | Type\t\t| ATK Power\t| DEF Power\t| HP\t|")
                     for i in range(1,len(monsterdata)): # Menampilkan setiap monster yang tersedia di Shop
                         if monsterdata[i][0] in idMonsterShop:
                             continue
@@ -227,18 +227,18 @@ def shopmanagement(potionShop,monstershop,monsterdata)   :
                     ubah_pilih = (input(">>> Pilih antara monster/potion: "))
                 if ubah_pilih == "monster":
                     idMonsterUbah = (input(">>> Masukkan id monster: ")) # Nanti nambahin validasi
-                    stokMonsterBaru = int(input(">>> Masukkan stok baru: "))
-                    hargaMonsterBaru = int(input(">>> Masukkan harga baru: "))
+                    stokMonsterBaru = (input(">>> Masukkan stok baru: "))
+                    hargaMonsterBaru = (input(">>> Masukkan harga baru: "))
                     pesanUbah = f"{monsterdata[int(idMonsterUbah)][1]} telah berhasil diubah "
                     if (stokMonsterBaru != ""):
-                        pesanUbah += f"dengan stok baru sejumlah {stokMonsterBaru}"
+                        pesanUbah += f"dengan stok baru sejumlah {int(stokMonsterBaru)}"
                         for i in range(len(monstershop)) :
                             if monstershop[i][0]==(idMonsterUbah) :
                                 monstershop[i][1]=str(stokMonsterBaru)
                     if (stokMonsterBaru != "") and (hargaMonsterBaru != ""):
                         pesanUbah += " dan "
                     if (hargaMonsterBaru != ""):
-                        pesanUbah += f"dengan harga baru {hargaMonsterBaru}"
+                        pesanUbah += f"dengan harga baru {int(hargaMonsterBaru)}"
                         for i in range(len(monstershop)) :
                             if monstershop[i][0]==(idMonsterUbah) :
                                 monstershop[i][2]=str(hargaMonsterBaru)
