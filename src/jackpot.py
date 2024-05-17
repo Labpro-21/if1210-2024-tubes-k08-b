@@ -1,63 +1,73 @@
-from RandomNumberGenerator import *
 import time
-def cekrng(RNG) :
-    if RNG>=1 and RNG<=40 :
-        item = 0
-    elif RNG>=41 and RNG<=65 :
-        item = 1
-    elif RNG>=66 and RNG<=80 :
-        item = 2
-    elif RNG>=81 and RNG<=95 :
-        item = 3
-    elif RNG>=96 and RNG<=100 :
-        item = 4
-    return item
+from RandomNumberGenerator import RNG
 
-def gacha(yourcoin) :
-    yourcoin = int(yourcoin)
-    icon = ['TOPI', 'PEDANG', 'BAJU', 'CELANA', 'JAM' ]
-    value = [50,100,150,200,250,400]
-    RNG1 = RNG(1,100)
-    time.sleep(2/10)
-    RNG2 = RNG(1,100)
-    time.sleep(1/10)
-    RNG3 = RNG(1,100)
+def cekrng(RNG):
+    if 1 <= RNG <= 40:
+        return 0
+    elif 41 <= RNG <= 65:
+        return 1
+    elif 66 <= RNG <= 80:
+        return 2
+    elif 81 <= RNG <= 95:
+        return 3
+    elif 96 <= RNG <= 100:
+        return 4
+
+def gacha(id, yourcoin, monsInv):
+    icon = ['TOPI', 'PEDANG', 'BAJU', 'CELANA', 'JAM']
+    value = [50, 100, 150, 200, 250, 400]
+    RNG1 = RNG(1, 100)
+    time.sleep(0.2)
+    RNG2 = RNG(1, 100)
+    time.sleep(0.1)
+    RNG3 = RNG(1, 100)
+
     item1 = cekrng(RNG1)
     item2 = cekrng(RNG2)
     item3 = cekrng(RNG3)
-    totalcoin = value[item1]+value[item2]+value[item3]
-    print(f"{icon[item1]} | {icon[item2]} | {icon[item3]}")
-    prize = False
-    if prize == False :
-        if item1==item2 and item2==item3 :
-            print('SELAMATT!! ANDA MENDAPATKAN GORLOCK THE DESTROYER! DESTROY EVERYTHING!')
-            prize == True
-        else :
-            print(f"ANDA TIDAK DAPAT JACKPOT, TAPI ANDA DAPAT {totalcoin} COINS !!!")
-            yourcoin += totalcoin
-    elif prize == True :
-        if item1==item2 and item2==item3 :
-            print('SELAMATT!! GORLOCK SUDAH ANDA MILIKI, GORLOCK AKAN DIUBAH KE O.W.C.A Coin sebanyak 1000 Coin')
-            yourcoin += 1000
-        else :
-            print(f"ANDA TIDAK DAPAT JACKPOT, TAPI ANDA DAPAT {totalcoin} COINS !!!")
-            yourcoin += totalcoin
+    totalcoin = value[item1] + value[item2] + value[item3]
 
-def jackpot(yourcoin) :
-    coin=yourcoin
+    print(f"{icon[item1]} | {icon[item2]} | {icon[item3]}")
+
+    if item1 == item2 and item2 == item3:
+        print('SELAMAT!! ANDA MENDAPATKAN GORLOCK THE DESTROYER! DESTROY EVERYTHING!')
+        if any(item[1] == "Gorlock" for item in monsInv):
+            print('SELAMAT!! GORLOCK SUDAH ANDA MILIKI, GORLOCK AKAN DIUBAH KE O.W.C.A Coin sebanyak 1000 Coin')
+            yourcoin += 1000
+        else:
+            monsInv.append([id, "Gorlock", 1])
+    else:
+        print(f"ANDA TIDAK DAPAT JACKPOT, TAPI ANDA DAPAT {totalcoin} COIN !!!")
+        yourcoin += totalcoin
+
+    return yourcoin
+
+def jackpot(id, yourcoin, monsInv):
+    yourcoin = int(yourcoin)
     print("SELAMAT DATANG DI JACKPOT 888!!!")
-    print("ANDA DAPAT MENDAPATKAN GORLOCK THE DESTROYER DENGAN HARGA 400 COIN")
+    print("ANDA DAPAT MENDAPATKAN GORLOCK THE DESTROYER DENGAN HARGA 500 COIN")
+    print(f"COIN ANDA SAAT INI SEJUMLAH {yourcoin}")
     print("APAKAH ANDA INGIN MENCOBA KEBERUNTUNGAN ANDA???")
-    while True :
-        inp = input("(Y/N)----->")
-        if inp.lower() == 'y' :
-            confirm = input("APAKAH ANDA YAKIN? (Y/N) :")
-            if confirm.lower() == 'y' :
-                if coin >= 400 :
-                    gacha(yourcoin)
-                    coin-=400
-                    print("APAKAH ANDA INGIN MELANJUTKAN??",end=" ")
-                else :
-                    print("COIN TIDAK CUKUP")
-            else :
-                print("OK")
+
+    while True:
+        inp = input("(Y/N)----->").lower()
+        if inp == 'y':
+            confirm = input("APAKAH ANDA YAKIN? (Y/N) :").lower()
+            if confirm == 'y':
+                if yourcoin >= 500:
+                    yourcoin = gacha(id, yourcoin, monsInv)
+                    yourcoin -= 500
+                    print(f'COIN ANDA TERSISA {yourcoin}')
+                    print("APAKAH ANDA INGIN MELANJUTKAN??", end=" ")
+                else:
+                    print("YAH COIN ANDA TIDAK CUKUP")
+                    print("SILAKAN COBA JACKPOT DI WAKTU LAIN")
+                    break
+            elif confirm == 'n':
+                break
+            else:
+                print("Masukkan input yang benar")
+        elif inp == 'n':
+            break
+        else:
+            print("Masukkan input yang benar")
