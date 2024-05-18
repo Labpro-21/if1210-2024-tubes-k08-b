@@ -17,7 +17,7 @@ def load() :
         user = read_csv(path+"/user.csv")
         inventory = read_csv(path+"/item_inventory.csv")
         monster = read_csv(path+"/monster.csv")
-        monsterinventory = read_csv(path+"/monser_inventory.csv")
+        monsterinventory = read_csv(path+"/monster_inventory.csv")
         itemshop=read_csv(path+"/item_shop.csv")
         monstershop=read_csv(path+"/monster_shop.csv")
         return [user,inventory,monster,monsterinventory,itemshop,monstershop]
@@ -105,7 +105,7 @@ def save(inventory,monster,user,monstershop,itemshop,monsterinventory) :
         write_csv(path+"/monster.csv",monster)
         write_csv(path+"/monster_shop.csv",monstershop)
         write_csv(path+"/item_shop.csv",itemshop)
-        write_csv(path+"/monser_inventory.csv",monsterinventory)
+        write_csv(path+"/monster_inventory.csv",monsterinventory)
     else :
         os.mkdir(path)
         write_csv(path+"/item_inventory.csv",inventory)
@@ -113,6 +113,6 @@ def save(inventory,monster,user,monstershop,itemshop,monsterinventory) :
         write_csv(path+"/monster.csv",monster)
         write_csv(path+"/monster_shop.csv",monstershop)
         write_csv(path+"/item_shop.csv",itemshop)
-        write_csv(path+"/monser_inventory.csv",monsterinventory)
+        write_csv(path+"/monster_inventory.csv",monsterinventory)
 
 
