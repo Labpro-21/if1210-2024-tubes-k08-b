@@ -1,98 +1,105 @@
-def jumlahpot(userinventory) :
-  for i in userinventory :
-    if i[1]=='Strength Potion' :
-      jumlahstr = i[2]
+# fungsi jumlahPot untuk mengambil data potion yang ada di userInventory
+def jumlahPot(userInventory) :
+  for i in userInventory :
+    if i[1] == 'Strength Potion' :
+      jumlahStr = i[2]
       break
-  else : jumlahstr = 0
-  for i in userinventory :
-    if i[1]=='Resilience Potion' :
-      jumlahres = i[2]
+    else : 
+      jumlahStr = 0
+  for i in userInventory :
+    if i[1] == 'Resilience Potion' :
+      jumlahRes = i[2]
       break
-  else : jumlahres = 0
-  for i in userinventory :
-    if i[1]=='Healing Potion' :
-      jumlahheal = i[2]
+    else : 
+      jumlahRes = 0
+  for i in userInventory :
+    if i[1] == 'Healing Potion' :
+      jumlahHeal = i[2]
       break
-  else : jumlahheal = 0
-  return [int(jumlahstr),int(jumlahres),int(jumlahheal)]
+    else : 
+      jumlahHeal = 0
 
-def lokasipot(userinventory) :
-  x=0
-  for i in userinventory :
-    if i[1]=='Strength Potion' :
-      break
-    x+=1
-  else : x=999
-  y=0
-  for i in userinventory :
-    if i[1]=='Resilience Potion' :
-      break
-    y+=1
-  else : y=999
-  z=0
-  for i in userinventory :
-    if i[1]=='Healing Potion' :
-      break
-    z+=1
-  else : x=999
-  return [x,y,z]
+  return [int(jumlahStr), int(jumlahRes), int(jumlahHeal)]
 
-                                    # used_Pot_Array adalah array untuk menunjukkan apakah sebuah potion telah digunakan sekali dalam battle dengan used_Pot_Array [jumlah strength potion digunakan, jumlah resilience potion digunakan, jumlah heal potion digunakan]
-def potion(jumlahpot,lokasipot,used_Pot_Array, userinventory, attack, defense, HP, max_HP, mons_Name, pilihan):
-    if pilihan==1 :
-      if int(jumlahpot[0])> 0 :
-        if used_Pot_Array[0] == 0 :
+# fungsi indexPot untuk mengecek index masing-masing tipe potion di userInventory
+def indexPot(userInventory) :
+  indexStr = 0
+  indexRes = 0
+  indexHeal = 0
+
+  for i in userInventory :
+    if i[1] != 'Strength Potion' :                                        # untuk mencari indexStr dengan menambahkan indexStr secara berulang
+      indexStr += 1
+    elif i[1] == 'Strength Potion' :                                      # untuk mendapatkan indexStr dengan menghentikan penambahan indexStr
+      break
+
+  for i in userInventory :
+    if i[1] != 'Resilience Potion' :
+      indexRes += 1
+    elif i[1] == 'Resilience Potion' : 
+      break
+
+  for i in userInventory :
+    if i[1] != 'Healing Potion' :
+      indexHeal += 1
+    elif i[1] == 'Healing Potion' : 
+      break
+
+  return [indexStr, indexRes, indexHeal]
+
+# fungsi potion untuk meng-return nilai hasil penggunaan potion atau 0 untuk diproses di battle.py
+def potion(jumlahpot, indexPot, used_Pot_Array, userInventory, attack, defense, HP, max_HP, mons_Name, pilihan):
+    if pilihan == 1 :
+      if int(jumlahpot[0]) > 0 :                           # mengecek ada tidaknya potion strength
+        if used_Pot_Array[0] == 0 :                        # mengecek pernah tidaknya potion strength digunakan
           used_Pot_Array[0] += 1
           attack *= 105/100
           print(f"Potion telah diminum {mons_Name}, {mons_Name} menjadi lebih kuat!!")
           jumlahpot[0] -= 1
-          userinventory[lokasipot[0]][2]=str(int(userinventory[lokasipot[0]][2])-1)
-          return attack
+          userInventory[indexPot[0]][2] = str(int(userInventory[indexPot[0]][2])-1)
+          return attack                                    # return nilai attack monster setelah menggunakan potion strength
         else :
-          print(f"Potion hanya bisa digunakan sekali")
+          print("Potion hanya bisa digunakan sekali")
+          return 0                                         # return 0 untuk mengindikasi potion tidak bisa digunakan
+      else :
+        print("Sayangnya Anda tidak memiliki potion tersebut, silakan pilih potion lain")
+        return 0
+      
+    elif pilihan == 2 :
+      if int(jumlahpot[1]) > 0 :                           # mengecek ada tidaknya potion resilience
+        if used_Pot_Array[1] == 0 :                        # mengecek pernah tidaknya potion resilience digunakan
+          used_Pot_Array[1] += 1
+          defense *= 110/100 
+          print(f"Potion telah diminum {mons_Name}, {mons_Name} menjadi lebih sulit dilukai!!")
+          jumlahpot[1] -=1
+          userInventory[indexPot[1]][2] = str(int(userInventory[indexPot[1]][2])-1)
+          return defense                                   # return nilai defense monster setelah menggunakan potion resilience
+        else : 
+          print("Potion hanya bisa digunakan sekali")
           return 0
       else :
         print("Sayangnya Anda tidak memiliki potion tersebut, silakan pilih potion lain: ")
         return 0
       
-    elif pilihan==2 :
-      if int(jumlahpot[1]) > 0 :
-        if used_Pot_Array[1] == 0 :
-          used_Pot_Array[1] += 1
-          defense *= 105/100
-          print(f"Potion telah diminum {mons_Name}, {mons_Name} menjadi lebih sulit dilukai!!")
-          jumlahpot[1] -=1
-          userinventory[lokasipot[1]][2]=str(int(userinventory[lokasipot[1]][2])-1)
-          return defense
-        else : 
-          print(f"Potion hanya bisa digunakan sekali")
-          return 0
-      else :
-        print("Sayangnya Anda tidak memiliki potion tersebut, silakan pilih potion lain: ")
-        return 0
     elif pilihan==3 :
-      if int(jumlahpot[2]) > 0 :
-        if used_Pot_Array[2] == 0 :
+      if int(jumlahpot[2]) > 0 :                           # mengecek ada tidaknya potion healing
+        if used_Pot_Array[2] == 0 :                        # mengecek pernah tidaknya potion healing digunakan
           used_Pot_Array[2] += 1
-          if HP * 125/100 <= max_HP :
+          if HP * 125/100 <= max_HP :                      # mengecek penggunaan potion melebihi HP maksimum atau tidak
             HP *= 125/100
             print(f"Potion telah diminum {mons_Name}, {mons_Name} beregenerasi dengan cepat sehingga hampir semua luka yang diterimanya menghilang!!")
-            jumlahpot[2] -=1
-            userinventory[lokasipot[2]][2]=str(int(userinventory[lokasipot[2]][2])-1)
-            return HP
+            jumlahpot[2] -= 1
+            userInventory[indexPot[2]][2] = str(int(userInventory[indexPot[2]][2])-1)
+            return HP                                      # return nilai HP monster setelah menggunakan potion healing
           else :
             HP = max_HP
             print(f"Potion telah diminum {mons_Name}, {mons_Name} beregenerasi dengan cepat sehingga hampir semua luka yang diterimanya menghilang!!")
-            jumlahpot[2] -=1
-            userinventory[lokasipot[2]][2]=str(int(userinventory[lokasipot[2]][2])-1)
+            jumlahpot[2] -= 1
+            userInventory[indexPot[2]][2] = str(int(userInventory[indexPot[2]][2])-1)
             return HP
         else : 
-          print(f"Potion hanya bisa digunakan sekali")
+          print("Potion hanya bisa digunakan sekali")
           return 0
       else :
         print("Sayangnya Anda tidak memiliki potion tersebut, silakan pilih potion lain: ")
         return 0
-      
-  
-
-# contoh penggunaan function : potion(pot_Inventory (2, csvRead("E:\Documents\Daspro\Tubes\if1210-2024-tubes-k08-b\item_inventory.csv")), used_Pot_Array, 10, 20, 30, 100, "Zuko")
