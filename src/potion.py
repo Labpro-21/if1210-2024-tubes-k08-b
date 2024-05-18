@@ -1,3 +1,4 @@
+#FUNGI UNTUK MENGHITUNG JUMLAH MASING MASING POTION
 def jumlahpot(userinventory) :
   for i in userinventory :
     if i[1]=='Strength Potion' :
@@ -14,8 +15,9 @@ def jumlahpot(userinventory) :
       jumlahheal = i[2]
       break
   else : jumlahheal = 0
-  return [int(jumlahstr),int(jumlahres),int(jumlahheal)]
+  return [int(jumlahstr),int(jumlahres),int(jumlahheal)] #RETURN LIST MASING MASING JUMLAH POTION
 
+#FUNGSI MENCARI INDEKS LOKASI POTION DI INVENTORY
 def lokasipot(userinventory) :
   x=0
   for i in userinventory :
@@ -35,31 +37,30 @@ def lokasipot(userinventory) :
       break
     z+=1
   else : x=999
-  return [x,y,z]
+  return [x,y,z] #RETURN INDEKS POTION DI INVENTORY
 
-                                    # used_Pot_Array adalah array untuk menunjukkan apakah sebuah potion telah digunakan sekali dalam battle dengan used_Pot_Array [jumlah strength potion digunakan, jumlah resilience potion digunakan, jumlah heal potion digunakan]
 def potion(jumlahpot,lokasipot,used_Pot_Array, userinventory, attack, defense, HP, max_HP, mons_Name, pilihan):
-    if pilihan==1 :
+    if pilihan==1 :   #PILIHAN 1 ADALAH STR POTION
       if int(jumlahpot[0])> 0 :
         if used_Pot_Array[0] == 0 :
-          used_Pot_Array[0] += 1
-          attack *= 105/100
+          used_Pot_Array[0] += 1   #MENANDAKAN POTION SUDAH DIPAKE DAN TIDAK BISA DIPAKE LAGI
+          attack *= 110/100  #ATTACK BERTAMBAH 10 PERSEN
           print(f"Potion telah diminum {mons_Name}, {mons_Name} menjadi lebih kuat!!")
-          jumlahpot[0] -= 1
+          jumlahpot[0] -= 1  #JUMLAH STR POTION BERKURANG SATU
           userinventory[lokasipot[0]][2]=str(int(userinventory[lokasipot[0]][2])-1)
           return attack
         else :
-          print(f"Potion hanya bisa digunakan sekali")
+          print(f"Potion hanya bisa digunakan sekali")  #POTION SUDAH DIGUNAKAN
           return 0
-      else :
-        print("Sayangnya Anda tidak memiliki potion tersebut, silakan pilih potion lain: ")
+      else :  #POTION TIDAK ADA
+        print("Sayangnya Anda tidak memiliki potion tersebut, silakan pilih potion lain: ")  
         return 0
       
-    elif pilihan==2 :
+    elif pilihan==2 :   #PILIHAN 2 ADALAH RES POTION
       if int(jumlahpot[1]) > 0 :
         if used_Pot_Array[1] == 0 :
           used_Pot_Array[1] += 1
-          defense *= 105/100
+          defense *= 110/100   #DEFENSE BERTAMBAH 10 PERSEN
           print(f"Potion telah diminum {mons_Name}, {mons_Name} menjadi lebih sulit dilukai!!")
           jumlahpot[1] -=1
           userinventory[lokasipot[1]][2]=str(int(userinventory[lokasipot[1]][2])-1)
@@ -70,17 +71,17 @@ def potion(jumlahpot,lokasipot,used_Pot_Array, userinventory, attack, defense, H
       else :
         print("Sayangnya Anda tidak memiliki potion tersebut, silakan pilih potion lain: ")
         return 0
-    elif pilihan==3 :
+    elif pilihan==3 :  #PILIHAN 3 ADALAH HEAL POTION
       if int(jumlahpot[2]) > 0 :
         if used_Pot_Array[2] == 0 :
           used_Pot_Array[2] += 1
-          if HP * 125/100 <= max_HP :
+          if HP * 125/100 <= max_HP :  #JIKA HP + 25PERSEN TIDAK MELAMPAU MAKS HP(HP AWAL)
             HP *= 125/100
             print(f"Potion telah diminum {mons_Name}, {mons_Name} beregenerasi dengan cepat sehingga hampir semua luka yang diterimanya menghilang!!")
             jumlahpot[2] -=1
             userinventory[lokasipot[2]][2]=str(int(userinventory[lokasipot[2]][2])-1)
             return HP
-          else :
+          else : #JIKA MELAMPAU MAKS HP MAKA HEAL HANYA AKAN SAMPAI MAKS HP
             HP = max_HP
             print(f"Potion telah diminum {mons_Name}, {mons_Name} beregenerasi dengan cepat sehingga hampir semua luka yang diterimanya menghilang!!")
             jumlahpot[2] -=1
@@ -92,7 +93,3 @@ def potion(jumlahpot,lokasipot,used_Pot_Array, userinventory, attack, defense, H
       else :
         print("Sayangnya Anda tidak memiliki potion tersebut, silakan pilih potion lain: ")
         return 0
-      
-  
-
-# contoh penggunaan function : potion(pot_Inventory (2, csvRead("E:\Documents\Daspro\Tubes\if1210-2024-tubes-k08-b\item_inventory.csv")), used_Pot_Array, 10, 20, 30, 100, "Zuko")
