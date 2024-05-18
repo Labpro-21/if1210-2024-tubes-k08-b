@@ -34,9 +34,9 @@ if data != [] :
         elif command.lower() == "help" :
             help(loginStatus, "belumlogin")
         elif command.lower() == 'save' :
-            save(inventoryData, monsterData, userData, monsterShop, itemShop, monsInvData)
+            save(inventoryData, monsterData, userData, monsShopData, itemShopData, monsInvData)
         elif command.lower()=='exit' :
-            exit(userData, monsInvData, itemShop, monsterData, monsterShop, inventoryData)
+            exit(userData, monsInvData, itemShopData, monsterData, monsShopData, inventoryData)
             break
         else :
             print(f"command '{command}' tidak ada.")
@@ -51,7 +51,7 @@ if data != [] :
                         randomLevel = RNG(1,5)
                         opening(monsterData, randomNumber)
                         chosen = choose(yourMonsInv)
-                        battleCoin = battle(monsterData, monsInvData, yourMonsInv, userInv, chosen, randomNumber, randomLevel, 'battle')
+                        battleCoin,damageTaken,damageDealt = battle(monsterData, monsInvData, yourMonsInv, userInv, chosen, randomNumber, randomLevel, 'battle')
                         coin += battleCoin
                         userData[id][4] = str(coin)
                         print(userInv)
@@ -60,7 +60,7 @@ if data != [] :
                         coin += arenaCoin
                         userData[id][4] = str(coin)
                     elif command.lower() == 'inventory' :
-                        inventoryy(userInv, yourMonsInv, monsterData, role, coin)
+                        inventory(userInv, yourMonsInv, monsterData, role, coin)
                     elif command.lower() == 'logout' :
                         t=0
                         while True :
@@ -70,7 +70,6 @@ if data != [] :
                                 t = 1
                                 break
                             elif confirm.lower() == 'n' :
-                                t = 1
                                 break
                             else : 
                                 print("mangsud?")
@@ -78,15 +77,16 @@ if data != [] :
                                 loginStatus=False
                                 break
                     elif command.lower() == 'shop' :
-                        shopCoin = shopOpen(role, itemShopData, coin, userInv, monsterData, monsShopData, yourMonsInv, monsInvData)
-                        userData[id][4] = str(shopCoin)
+                        coin = shopOpen(role, itemShopData, coin, userInv, monsterData, monsShopData, yourMonsInv, monsInvData)
+                        userData[id][4] = str(coin)
                     elif command.lower() == 'help' :
                         help(loginStatus, role)
                     elif command.lower() == 'laboratory' :
-                        labCoin = laboratory(yourMonsInv, monsterData, coin, role)
-                        userData[id][4] = str(labCoin)
+                        coin = laboratory(yourMonsInv, monsterData, coin, role)
+                        userData[id][4] = str(coin)
                     elif command.lower() == 'jackpot' :
-                        jackpot(id, coin, monsInvData, yourMonsInv)
+                        coin = jackpot(id, coin, monsInvData, yourMonsInv)
+                        userData[id][4] = str(coin)
                     else :
                         print(f"command '{command}' tidak ada.")
                         print(userInv)
@@ -102,7 +102,7 @@ if data != [] :
                     if command.lower() == 'help':
                         help(loginStatus, role)
                     elif command.lower() == 'shop':
-                        monsterShop, itemShop = shopmanagement(itemShopData, monsShopData, monsterData)
+                        monsShopData, itemShopData = shopmanagement(itemShopData, monsShopData, monsterData)
                     elif command.lower() == 'logout' :
                         t=0
                         while True :
@@ -112,7 +112,6 @@ if data != [] :
                                 t=1
                                 break
                             elif confirm.lower() =='n' :
-                                t=1
                                 break
                             else : 
                                 print("mangsud?")

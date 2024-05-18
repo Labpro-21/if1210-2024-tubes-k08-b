@@ -26,9 +26,9 @@ def choose(yourmonsterdata) :
 #fungsi untuk menampilkan monster yg akan dilawan
 def opening(monsterdata,random_number) :
     name = monsterdata[random_number][1]
-    print(f'''  =============================================
-  >>>>>>>>>{name} telah datang !!!<<<<<<<<<
-  ============================================='''
+    print(f'''=============================================
+>>>>>>>>>{name} telah datang !!!<<<<<<<<<
+============================================='''
             )
    
 def battle(monsterdata,monsterinventory,yourmonsterdata,userinventory,chosen,random_number,random_level,type) :
@@ -50,13 +50,16 @@ def battle(monsterdata,monsterinventory,yourmonsterdata,userinventory,chosen,ran
         indeks+=1
 
     #deklarasi stat variabel 
-    yourattack = int(file1[indeks][2]) + (int(level)-1)*(10/100)*int(file1[indeks][2])
-    yourdefense = int(file1[indeks][3]) + (int(level)-1)*(10/100)*int(file1[indeks][3])
-    yourhealth = int(file1[indeks][4]) + (int(level)-1)*(10/100)*int(file1[indeks][4])
-    enemyhealth = int(file1[random_number][4]) + (random_level-1)*(10/100)*int(file1[random_number][4])
-    enemyattack = int(file1[random_number][2]) + (random_level-1)*(10/100)*int(file1[random_number][2])
-    enemydefense = int(file1[random_number][3]) + (random_level-1)*(10/100)*int(file1[random_number][3])
+    originalhealth = int(int(file1[indeks][4]) + (int(level)-1)*(10/100)*int(file1[indeks][4]))
+    yourattack = int(int(file1[indeks][2]) + (int(level)-1)*(10/100)*int(file1[indeks][2]))
+    yourdefense = int(int(file1[indeks][3]) + (int(level)-1)*(10/100)*int(file1[indeks][3]))
+    yourhealth = int(int(file1[indeks][4]) + (int(level)-1)*(10/100)*int(file1[indeks][4]))
+    enemyhealth = int(int(file1[random_number][4]) + (random_level-1)*(10/100)*int(file1[random_number][4]))
+    enemyattack = int(int(file1[random_number][2]) + (random_level-1)*(10/100)*int(file1[random_number][2]))
+    enemydefense = int(int(file1[random_number][3]) + (random_level-1)*(10/100)*int(file1[random_number][3]))
     
+    damagetaken=0
+    damagedealt=0
     turn=1
     while True :
         #menampilkan stat kedua monster saat battle
@@ -88,7 +91,12 @@ def battle(monsterdata,monsterinventory,yourmonsterdata,userinventory,chosen,ran
         if action=='1' :
             #ACTION ATTACK
             damage = RNG(yourattack*(70/100),yourattack*(130/100)) 
+            if enemyhealth >= (damage-(enemydefense/100)*damage) :  #menghitung damagedealt jika enemy belom mati
+                damagedealt += (damage-(enemydefense/100)*damage)
+            else : #jika enemy mati maka damagedealt hanya ditambah sebesar sisa darah enemy sebelum mati
+                damagedealt += enemyhealth
             enemyhealth -= (damage-(enemydefense/100)*damage) 
+            enemyhealth = int(enemyhealth)
             print("=============================================")
             print(">>>>>>>>>>>>>>>YOU ATTACKED !!!<<<<<<<<<<<<<<")
             if enemyhealth > 0 : #JIKA MONSTER BELOM MATI
@@ -97,7 +105,6 @@ def battle(monsterdata,monsterinventory,yourmonsterdata,userinventory,chosen,ran
             #ACTION POTION
             while True :
                 print("=======CHOOSE A POTION !=======")
-                print(jumlahpot(userinventory))
                 print("1. STRENGHT")
                 print(f"   you have : {jumlahpot(userinventory)[0]}")
                 print("2. RESILIENSE")
@@ -111,24 +118,24 @@ def battle(monsterdata,monsterinventory,yourmonsterdata,userinventory,chosen,ran
                     print(f"Opsi {potionchoice} tidak ada")
                     continue
                 #newstat adalah stat baru baik untuk atk/def/hp setelah memakai potion
-                newstat = potion(jumlahpot(userinventory),lokasipot(userinventory),used_pot,userinventory,yourattack,yourdefense,yourhealth,100000,name,int(potionchoice))
+                newstat = potion(jumlahpot(userinventory),lokasipot(userinventory),used_pot,userinventory,yourattack,yourdefense,yourhealth,originalhealth,name,int(potionchoice))
                 if potionchoice =='1' : #ATK potion
                     if newstat==0 : #jika potion tidak bisa digunakan
                         continue
                     else :
-                        yourattack = newstat
+                        yourattack = int(newstat)
                         break
                 elif potionchoice =='2' : #DEF potion
                     if newstat==0 :
                         continue
                     else :
-                        yourdefense = newstat
+                        yourdefense = int(newstat)
                         break
                 elif potionchoice =='3' : #Heal potion
                     if newstat==0 :
                         continue
                     else :
-                        yourhealth = newstat
+                        yourhealth = int(newstat)
                         break
                 elif potionchoice =='4' : #Cancel
                     break
@@ -138,7 +145,7 @@ def battle(monsterdata,monsterinventory,yourmonsterdata,userinventory,chosen,ran
             if type =='battle' : #Jika mode battle action 3 adalah monster ball
                 success = monsterball(random_number,random_level,userinventory,monsterdata,monsterinventory,yourmonsterdata)
                 if success==1 :
-                    return 0
+                    return 0,damagetaken,damagedealt
                 elif success ==2 : #Jika gagal
                     continue
             elif type =='arena': #Jika mode arena action 3 adalah quit
@@ -146,14 +153,15 @@ def battle(monsterdata,monsterinventory,yourmonsterdata,userinventory,chosen,ran
                 print('ANDA MENINGGALKAN PERTANDINGAN')
                 print('=============================================')
                 coin = 0
-                return coin
+                return coin,damagetaken,damagedealt
         elif action=='4' :
             if type=='arena' :
                 print("opsi 4 tidak ada")
+                continue
             elif type=='battle' :
                 print('ANDA MENINGGALKAN PERTANDINGAN')
                 coin = 0
-                return coin     
+                return coin,damagetaken,damagedealt     
         else :
             print(f"opsi {action} tidak ada")
             continue
@@ -167,19 +175,26 @@ def battle(monsterdata,monsterinventory,yourmonsterdata,userinventory,chosen,ran
             coin = RNG(1,50)
             print(f"YEEEEEY YOU GOT {coin} coin")
             print("=============================================")
-            return coin
+            return coin,damagetaken,damagedealt
+        
         #Jika musuh masih hidup, musuh menyerang balik
         damagemusuh=RNG(enemyattack*(70/100),enemyattack*(130/100))
         print(f">>>>>>>>>>>>>{file1[random_number][1]} ATTACK BACK !!!<<<<<<<<<<<<")
+        if yourhealth >= (damagemusuh - (yourdefense/100)*damagemusuh) :
+            damagetaken += (damagemusuh - (yourdefense/100)*damagemusuh) #Jika monster kita masih hidup setelah serangan
+        else :
+            damagetaken += yourhealth #jika monster kita mati setelah serangan
         yourhealth -= (damagemusuh - (yourdefense/100)*damagemusuh)
+        yourhealth = int(yourhealth)
         if yourhealth >0 : #jika monster kita masih hidup
             print(f"{name} HEALTH IS DOWN TO {yourhealth}")
         print("=============================================")
+
         #jika darah monster kita habis
         if yourhealth <= 0 :
             print("=============================================")
             print("YOU ARE DEAD")
             print("DONT GIVE UP")
             print("=============================================")
-            return 0
+            return 0,damagetaken,damagedealt
         turn+=1
