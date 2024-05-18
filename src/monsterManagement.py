@@ -88,12 +88,12 @@ def newHp():
 # FUNGSI CHECK Y/N
 def checkUserInput(listMonster,userInput, nType, nAttack , nDefense, nHp):
     while True:
-        if userInput == "Y" :
+        if userInput.lower() == "y" :
             # disini masukkan file ke csv dulu karena bila append terlebih dahulu len(listMonster) id akan tidak sesuai pada file monster.csv
             listMonster.append([str(len(listMonster)), nType, str(nAttack), str(nDefense), str(nHp)])
             print("Monster berhasil ditambahkan")
             break
-        elif userInput == "N" :
+        elif userInput.lower() == "n" :
             print("Monster gagal ditambahkan")
             break
         else : # Input bukan Y/N

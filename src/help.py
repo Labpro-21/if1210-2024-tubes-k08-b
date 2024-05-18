@@ -22,7 +22,9 @@ def help(status,role) :
             print("   Cek semua item dan monster anda")
             print("5. Laboratory")
             print("   Tempat untuk meng-upgrade monster anda")
-            print("6. Logout")
+            print("6. Jackpot")
+            print("   Tempat untuk menguji keberuntungan anda")
+            print("7. Logout")
             print("   Keluar dari akun anda")
         if role == 'admin' :
             print("List command yang dapat anda lakukan :")
