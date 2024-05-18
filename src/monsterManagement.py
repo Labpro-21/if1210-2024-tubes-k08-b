@@ -1,10 +1,27 @@
-from csvParser import *
-pathFileMonster = r"C:\Files\if1210-2024-tubes-k08-b\data\monster.csv"
-listMonster = csvReadInt(pathFileMonster)
+'''from csvParser import *
+pathFileMonster = r"data\data1\monster.csv"
+listMonster = csvReadInt(pathFileMonster)'''
 
 # FUNGSI UNTUK PENAMBAHAN MONSTER
 # Fungsi - fungsi proses untuk mengecek validasi input data monster
-def checkType(type):
+def cekint(input):
+    # Check if the input is empty, it's not an integer
+    if input == '':
+        return False
+    # Convert input to string if it is not already
+    input = str(input)
+    # Check for a negative sign at the beginning
+    if input[0] == '-':
+        if len(input) == 1:
+            return False  # Only a '-' is not an integer
+        input = input[1:]  # Remove the negative sign for further check
+    # Check if all characters are digits
+    for char in input:
+        if ord(char) < ord('0') or ord(char) > ord('9'):
+            return False
+    return True
+
+def checkType(type,listMonster):
     while True:
         monsterExist = False # asumsi awal, nama yang diinput tidak sama dengan nama pada database.
         for i in range(1, len(listMonster)): # 1 sebagai parameter karena listMonster[0] merupakan judul, len(listMonster) sebagai parameter akhir karena database monster bisa berubah seiring game berjalan.
@@ -18,7 +35,7 @@ def checkType(type):
 
 def checkAttack(attack):
     while True:
-        if attack.isdigit(): # bila keseluruhan attack berupa angka
+        if cekint(attack): # bila keseluruhan attack berupa angka
             attack = int(attack) # ubah menjadi integer agar dapat dioperasikan
             break 
         else : # terdapat character yang bukan angka
@@ -28,7 +45,7 @@ def checkAttack(attack):
 
 def checkDefense(defense):
     while True:
-        if defense.isdigit(): # defense berupa angka secara keseluruhan
+        if cekint(defense): # defense berupa angka secara keseluruhan
             defense = int(defense) # diubah menjadi integer agar dapat dioperasikan
             if 0 <= defense <= 50 : # nilai sudah sesuai ketentuan
                 break
@@ -42,7 +59,7 @@ def checkDefense(defense):
 
 def checkHp(hp):
     while True:
-        if hp.isdigit(): # keseluruhan hp berupa angka
+        if cekint(hp): # keseluruhan hp berupa angka
             hp = int(hp) # ubah menjadi integer agar dapat dioperasikan
             break
         else : # terdapat character yang bukan angka pada hp
@@ -52,9 +69,9 @@ def checkHp(hp):
 
 # FUNGSI SIMPLIFIKASI
 # Fungsi-fungsi dibawah berisi input awal data monster baru dari user
-def newType():
+def newType(listMonster):
     type = str(input("Masukkan Type Monster : "))
-    return checkType(type)
+    return checkType(type,listMonster)
 
 def newAttack():
     attack = str(input("Masukkan attack power : "))
@@ -69,11 +86,11 @@ def newHp():
     return checkHp(hp)
 
 # FUNGSI CHECK Y/N
-def checkUserInput(userInput, nType, nAttack , nDefense, nHp):
+def checkUserInput(listMonster,userInput, nType, nAttack , nDefense, nHp):
     while True:
         if userInput == "Y" :
             # disini masukkan file ke csv dulu karena bila append terlebih dahulu len(listMonster) id akan tidak sesuai pada file monster.csv
-            listMonster.append([len(listMonster), nType, nAttack, nDefense, nHp])
+            listMonster.append([str(len(listMonster)), nType, str(nAttack), str(nDefense), str(nHp)])
             print("Monster berhasil ditambahkan")
             break
         elif userInput == "N" :
@@ -82,19 +99,19 @@ def checkUserInput(userInput, nType, nAttack , nDefense, nHp):
         else : # Input bukan Y/N
             print("input tidak valid, hanya menerima input Y/N")
             userInput = str(input("(Y/N): "))
-def validUserInput(userInput, nType, nAttack, nDefense, nHp):
+
+def validUserInput(listMonster,userInput, nType, nAttack, nDefense, nHp):
     userInput = str(input("Apakah mau tambahkan monster? (Y/N): "))
-    return checkUserInput(userInput, nType, nAttack, nDefense, nHp)
+    checkUserInput(listMonster,userInput, nType, nAttack, nDefense, nHp)
 
 # FUNGSI PENAMBAHAN MONSTER BARU SECARA KESELURUHAN
-def newMonster():
-    nType = newType()
+def newMonster(listMonster):
+    nType = newType(listMonster)
     nAttack = newAttack()
     nDefense = newDefense()
     nHp = newHp()
     userInput = ""
-    validUserInput(userInput, nType, nAttack, nDefense, nHp)
-    return
+    validUserInput(listMonster,userInput, nType, nAttack, nDefense, nHp)
 
 # FUNGSI PENCETAKAN TABEL RAPIH
 # Fungsi mengubah elemen integer pada list dari data csv menjadi string karena nanti akan digunakan fungsi len()
@@ -107,7 +124,7 @@ def changeInt(listMonster):
 
 # Fungsi mencari elemen terbesar dalam 1 kolom
 # elemen terbesar tiap kolom akan disimpan pada array largestElement, posisi bersamaan dengan kolom
-def findLargestElement(largestElement):
+def findLargestElement(largestElement,listMonster):
     for i in range(len(largestElement)):
         for j in range(len(listMonster)):
             if largestElement[i] < len(listMonster[j][i]):
@@ -158,17 +175,17 @@ def printTabel (listMonster, largestElement):
     return
 
 # Fungsi akhir pencetakan tabel
-def tabelMonster():
+def tabelMonster(listMonster):
     largestElement = [-1, -1, -1, -1, -1]
     newHeader = ["ID", "Type", "ATK Power", "DEF Power", "HP"]
     changeInt(listMonster)
-    findLargestElement(largestElement)
+    findLargestElement(largestElement,listMonster)
     changeHeader(newHeader, listMonster)
     printTabel(listMonster, largestElement)
     return
 
 # FUNGSI AKHIR MONSTER MANAGEMENT
-def monsterManagement():
+def monsterManagement(listMonster):
     while True :
         print("""
 SELAMAT DATANG DI DATABASE PARA MONSTER !!!
@@ -178,10 +195,10 @@ SELAMAT DATANG DI DATABASE PARA MONSTER !!!
         """)
         aksiUser = str(input("Pilih Aksi: "))
         if aksiUser == "1" :
-            tabelMonster()
+            tabelMonster(listMonster)
             str(input("Ketik apapun untuk balik ke menu: "))
         elif aksiUser == "2" :
-            newMonster()
+            newMonster(listMonster)
         elif aksiUser == "0" :
             print("Teirma kasih telah mengunjungi database monster")
             break
@@ -189,3 +206,4 @@ SELAMAT DATANG DI DATABASE PARA MONSTER !!!
             print("Input tidak valid, input yang diterima hanya 0/1/2")
 
 # PENERAPAN FUNGSI
+# monsterManagement()

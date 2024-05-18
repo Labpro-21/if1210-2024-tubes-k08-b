@@ -1,6 +1,6 @@
 from csvParser import csvRead, csvWriteAll
 potionID = ["Type", "Healing Potion", "Resilience Potion", "Strength Potion", "Monster Ball"]
-pathMonsterShop = "data\data1\monster_shop.csv"
+'''pathMonsterShop = "data\data1\monster_shop.csv"
 monstershop = csvRead(pathMonsterShop)
 pathMonsterDatabase = "data\data1\monster.csv"
 monsterdata = csvRead(pathMonsterDatabase)
@@ -9,7 +9,7 @@ for i in range(1,len(monstershop)):
     idMonsterShop.append(monstershop[i][0])
 idMonsterData = []
 for i in range(1,len(monsterdata)):
-    idMonsterData.append(monsterdata[i][0])
+    idMonsterData.append(monsterdata[i][0])'''
 
 def sortPotion(potionShop):
     if potionShop[1][0] == "Resilience Potion":
@@ -125,10 +125,9 @@ def shopOpen(role,potionShop,coin,userinventory,monsterdata,monstershop,yourmons
                         else :
                             print("Stock Potion habis!")
                             break
-                break
             else: # pilihMenu == "keluar"
                 print(f"Sampai bertemu lagi, User!")
-                break
+                return yourcoin
 def shopmanagement(potionShop,monstershop,monsterdata)   :
         print("   ↤↤↤↤ SELAMAT DATANG KEMBALI ADMIN! ↦↦↦↦")
         print()
@@ -169,7 +168,7 @@ def shopmanagement(potionShop,monstershop,monsterdata)   :
                 while tambah_pilih != "monster" and tambah_pilih != "potion":
                     tambah_pilih = (input(">>> Pilih antara monster/potion: "))
                 if tambah_pilih == "monster":
-                    print("ID | Type\t\t\t| ATK Power\t| DEF Power\t| HP\t|")
+                    print("ID | Type\t\t| ATK Power\t| DEF Power\t| HP\t|")
                     for i in range(1,len(monsterdata)): # Menampilkan setiap monster yang tersedia di Shop
                         if monsterdata[i][0] in idMonsterShop:
                             continue
@@ -227,19 +226,22 @@ def shopmanagement(potionShop,monstershop,monsterdata)   :
                     ubah_pilih = (input(">>> Pilih antara monster/potion: "))
                 if ubah_pilih == "monster":
                     idMonsterUbah = (input(">>> Masukkan id monster: ")) # Nanti nambahin validasi
-                    stokMonsterBaru = int(input(">>> Masukkan stok baru: "))
-                    hargaMonsterBaru = int(input(">>> Masukkan harga baru: "))
+                    stokMonsterBaru = (input(">>> Masukkan stok baru: "))
+                    hargaMonsterBaru = (input(">>> Masukkan harga baru: "))
                     pesanUbah = f"{monsterdata[int(idMonsterUbah)][1]} telah berhasil diubah "
                     if (stokMonsterBaru != ""):
-                        pesanUbah += f"dengan stok baru sejumlah {stokMonsterBaru}"
+                        pesanUbah += f"dengan stok baru sejumlah {int(stokMonsterBaru)}"
+                        for i in range(len(monstershop)) :
+                            if monstershop[i][0]==(idMonsterUbah) :
+                                monstershop[i][1]=str(stokMonsterBaru)
                     if (stokMonsterBaru != "") and (hargaMonsterBaru != ""):
                         pesanUbah += " dan "
                     if (hargaMonsterBaru != ""):
-                        pesanUbah += f"dengan harga baru {hargaMonsterBaru}"
+                        pesanUbah += f"dengan harga baru {int(hargaMonsterBaru)}"
+                        for i in range(len(monstershop)) :
+                            if monstershop[i][0]==(idMonsterUbah) :
+                                monstershop[i][2]=str(hargaMonsterBaru)
                     pesanUbah += "!"
-                    for i in range(1,len(monstershop)):
-                        if monstershop[i][0] == int(idMonsterUbah):
-                            monstershop[int(idMonsterUbah)] = [monsterdata[int(idMonsterUbah)][0],str(stokMonsterBaru),str(hargaMonsterBaru)]
                     print(pesanUbah)
                 elif ubah_pilih == "potion":
                     idPotionUbah = int((input(">>> Masukkan id potion: ")))
@@ -317,7 +319,7 @@ def shopmanagement(potionShop,monstershop,monsterdata)   :
 
             else: # pilihMenu == "keluar"
                 print("Sampai bertemu lagi Admin!")
-                break    
+                return monstershop,potionShop
 
 # shopOpen("agent")
 # shopOpen("admin")
