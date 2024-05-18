@@ -43,7 +43,8 @@ def gacha(id, coin, monsInv, yourMonsInv):
         print(f"ANDA TIDAK DAPAT JACKPOT, TAPI ANDA DAPAT {totalcoin} COIN !!!")
         coin  += totalcoin
     return coin
- 
+
+# fungsi jackpot untuk menjalankan program jackpot
 def jackpot(id, coin,  monsInv , yourMonsInv):
     coin  = int(coin) 
     print("SELAMAT DATANG DI JACKPOT 888!!!")
