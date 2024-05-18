@@ -113,14 +113,17 @@ def battle(monsterdata,monsterinventory,yourmonsterdata,userinventory,chosen,ran
                 print(f"   you have : {jumlahpot(userinventory)[2]}")
                 print("4. CANCEL")
                 potionchoice = (input("(1/2/3/4)--->"))
-                #jika input tidak benar
-                if potionchoice!='1' and potionchoice!='2' and potionchoice!='3' and potionchoice!='4' :
-                    print(f"Opsi {potionchoice} tidak ada")
+                #validasi input
+                for i in range(1,5) :
+                    if potionchoice==str(i) : #jika input==1/2/3/4
+                        break
+                else :
+                    print(f"Opsi {potionchoice} tidak ada") #jika input lainnya
                     continue
                 #newstat adalah stat baru baik untuk atk/def/hp setelah memakai potion
                 newstat = potion(jumlahpot(userinventory),lokasipot(userinventory),used_pot,userinventory,yourattack,yourdefense,yourhealth,originalhealth,name,int(potionchoice))
                 if potionchoice =='1' : #ATK potion
-                    if newstat==0 : #jika potion tidak bisa digunakan
+                    if newstat==0 : #newstat ==0 hanya terjadi jika potion tidak bisa digunakan
                         continue
                     else :
                         yourattack = int(newstat)
