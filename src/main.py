@@ -5,7 +5,7 @@ from RandomNumberGenerator import *
 from inventory import *
 from shopCurrency import *
 from help import *
-from laboratory import *
+from laboratory import * 
 from jackpot import *
 import time
 from exit import *
@@ -35,7 +35,7 @@ if data != [] :
             help(loginStatus, "belumlogin")
         elif command.lower() == 'save' :
             save(inventoryData, monsterData, userData, monsterShop, itemShop, monsInvData)
-        elif command.lower()=='exit' :
+        elif command.lower()== 'exit' :
             exit(userData, monsInvData, itemShop, monsterData, monsterShop, inventoryData)
             break
         else :
@@ -87,6 +87,8 @@ if data != [] :
                         userData[id][4] = str(labCoin)
                     elif command.lower() == 'jackpot' :
                         jackpot(id, coin, monsInvData, yourMonsInv)
+                        jackpotCoin = jackpot(id, coin, monsInvData, yourMonsInv)
+                        userData[id][4] = str(jackpotCoin)
                     else :
                         print(f"command '{command}' tidak ada.")
                         print(userInv)
