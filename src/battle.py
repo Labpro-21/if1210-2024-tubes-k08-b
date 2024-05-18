@@ -26,9 +26,9 @@ def choose(yourmonsterdata) :
 #fungsi untuk menampilkan monster yg akan dilawan
 def opening(monsterdata,random_number) :
     name = monsterdata[random_number][1]
-    print(f'''  =============================================
-  >>>>>>>>>{name} telah datang !!!<<<<<<<<<
-  ============================================='''
+    print(f'''=============================================
+>>>>>>>>>{name} telah datang !!!<<<<<<<<<
+============================================='''
             )
    
 def battle(monsterdata,monsterinventory,yourmonsterdata,userinventory,chosen,random_number,random_level,type) :
@@ -57,6 +57,8 @@ def battle(monsterdata,monsterinventory,yourmonsterdata,userinventory,chosen,ran
     enemyattack = int(file1[random_number][2]) + (random_level-1)*(10/100)*int(file1[random_number][2])
     enemydefense = int(file1[random_number][3]) + (random_level-1)*(10/100)*int(file1[random_number][3])
     
+    damagetaken=0
+    damagedealt=0
     turn=1
     while True :
         #menampilkan stat kedua monster saat battle
@@ -88,6 +90,10 @@ def battle(monsterdata,monsterinventory,yourmonsterdata,userinventory,chosen,ran
         if action=='1' :
             #ACTION ATTACK
             damage = RNG(yourattack*(70/100),yourattack*(130/100)) 
+            if enemyhealth >= (damage-(enemydefense/100)*damage) :  #menghitung damagedealt jika enemy belom mati
+                damagedealt += (damage-(enemydefense/100)*damage)
+            else : #jika enemy mati maka damagedealt hanya ditambah sebesar sisa darah enemy sebelum mati
+                damagedealt += enemyhealth
             enemyhealth -= (damage-(enemydefense/100)*damage) 
             print("=============================================")
             print(">>>>>>>>>>>>>>>YOU ATTACKED !!!<<<<<<<<<<<<<<")
@@ -138,7 +144,7 @@ def battle(monsterdata,monsterinventory,yourmonsterdata,userinventory,chosen,ran
             if type =='battle' : #Jika mode battle action 3 adalah monster ball
                 success = monsterball(random_number,random_level,userinventory,monsterdata,monsterinventory,yourmonsterdata)
                 if success==1 :
-                    return 0
+                    return 0,damagetaken,damagedealt
                 elif success ==2 : #Jika gagal
                     continue
             elif type =='arena': #Jika mode arena action 3 adalah quit
@@ -146,14 +152,15 @@ def battle(monsterdata,monsterinventory,yourmonsterdata,userinventory,chosen,ran
                 print('ANDA MENINGGALKAN PERTANDINGAN')
                 print('=============================================')
                 coin = 0
-                return coin
+                return coin,damagetaken,damagedealt
         elif action=='4' :
             if type=='arena' :
                 print("opsi 4 tidak ada")
+                continue
             elif type=='battle' :
                 print('ANDA MENINGGALKAN PERTANDINGAN')
                 coin = 0
-                return coin     
+                return coin,damagetaken,damagedealt     
         else :
             print(f"opsi {action} tidak ada")
             continue
@@ -167,19 +174,25 @@ def battle(monsterdata,monsterinventory,yourmonsterdata,userinventory,chosen,ran
             coin = RNG(1,50)
             print(f"YEEEEEY YOU GOT {coin} coin")
             print("=============================================")
-            return coin
+            return coin,damagetaken,damagedealt
+        
         #Jika musuh masih hidup, musuh menyerang balik
         damagemusuh=RNG(enemyattack*(70/100),enemyattack*(130/100))
         print(f">>>>>>>>>>>>>{file1[random_number][1]} ATTACK BACK !!!<<<<<<<<<<<<")
+        if yourhealth >= (damagemusuh - (yourdefense/100)*damagemusuh) :
+            damagetaken += (damagemusuh - (yourdefense/100)*damagemusuh) #Jika monster kita masih hidup setelah serangan
+        else :
+            damagetaken += yourhealth #jika monster kita mati setelah serangan
         yourhealth -= (damagemusuh - (yourdefense/100)*damagemusuh)
         if yourhealth >0 : #jika monster kita masih hidup
             print(f"{name} HEALTH IS DOWN TO {yourhealth}")
         print("=============================================")
+
         #jika darah monster kita habis
         if yourhealth <= 0 :
             print("=============================================")
             print("YOU ARE DEAD")
             print("DONT GIVE UP")
             print("=============================================")
-            return 0
+            return 0,damagetaken,damagedealt
         turn+=1

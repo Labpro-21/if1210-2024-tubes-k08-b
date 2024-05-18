@@ -2,15 +2,17 @@ from battle import *
 from RandomNumberGenerator import *
 
 def arena(monsterdata,monsterinventory,yourmonsterdata,userinventory) :
-
+    #deklarasi variabel
     coins=0
+    totaldamageTaken = 0
+    totaldamageDealt = 0
 
-    print("DO YOU WANT TO ENTER THE ARENA? (Y/N)")
-    inp = input("--------->")
-    if inp=="N" :
+    print("DO YOU WANT TO ENTER THE ARENA? (Y/N)") #double cek dari user
+    inp = input("--->")
+    if inp.lower()=="n" : #jika tidak jadi
         print("SEE U ANOTHER DAY")
-    elif inp=="Y" :
-        print("=====WELCOME TO THE ARENA=====")
+    elif inp.lower()=="y" :   
+        print("==========WELCOME TO THE ARENA==========")
         print("RULES :")
         print("1. THERE WILL BE A TOTAL OF 5 STAGES IN THE ARENA, EACH STAGE")
         print("   YOU HAVE TO FIGHT A MONSTER WITH EACH STAGE THE MONSTER WILL GET STRONGER")
@@ -19,22 +21,37 @@ def arena(monsterdata,monsterinventory,yourmonsterdata,userinventory) :
         print("3. IF YOU LOSE ONCE, THE ARENA WILL BE OVER, IF YOU WIN ALL THE WAY")
         print("   TO THE FIFTH STAGE YOU WILL GET MAXIMUM COINS")
         
-        chosen = choose(yourmonsterdata) 
-
-        for i in range(5) :
+        chosen = choose(yourmonsterdata) #fungsi untuk memilih monster dari pilihan monsterinventory
+        stage = 1
+        for i in range(5) : #pemanggilan fungsi battle sebanyak maksimum 5 kali
             random_number = RNG(1,len(monsterdata))
-            random_level = RNG(1,5)
+            enemylevel = i+1  #level monster musuh sesuai nomor stage
+            print(f"--------->>>STAGE {i+1}<<<---------")
             opening(monsterdata,random_number)
-            coin = battle(monsterdata,monsterinventory,yourmonsterdata,userinventory,chosen,random_number,random_level,'arena')
+            coin,damageTaken,damageDealt = battle(monsterdata,monsterinventory,yourmonsterdata,userinventory,chosen,random_number,enemylevel,'arena')
             coins += coin
-            if coin==0 :
-                print(f"YOU MADE IT TO STAGE NUMBER {i+1}, KEEP IMPROVING")
+            totaldamageTaken += damageTaken
+            totaldamageDealt += damageDealt
+
+            if coin==0 : #coin==0 di arena hanya terjadi saat monster kita kalah
+                print("ARENA IS OVER, TRY AGAIN")
                 break
+            else :  #monster kita menang
+                stage += 1
 
-        else :
+        if stage==5 :   #jika berhasil sampai ke stage terakhir dan menang akan mendapatkan bonus 50 coin
             print("CONGRATULATION YOU MADE IT ALL THE WAY!!!!")
-            print("HERE A BONUS 50 COIN FOR YOU!!!")
+            print("HERE A BONUS 50 COINs FOR YOU!!!")
             coins += 50
-        print(f"YOUR TOTAL COIN GAINED FROM THE ARENA : {coins}")
-    return coins
 
+        #STATISTIK ARENA
+        print("==========================================")
+        print("STATISTICS FROM THE ARENA :")
+        print(f"NUMBER OF STAGE : {stage-1}")
+        print(f"TOTAL COIN GAINED FROM THE ARENA : {coins}")
+        print(f"TOTAL DAMAGE TAKEN : {totaldamageTaken}")
+        print(f"TOTAL DAMAGE DEALT : {totaldamageDealt}")
+        print("==========================================")
+    else :
+        print("Masukkan input yg benar(Y/N)--->")
+    return coins

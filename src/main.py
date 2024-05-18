@@ -51,7 +51,7 @@ if data != [] :
                         randomLevel = RNG(1,5)
                         opening(monsterData, randomNumber)
                         chosen = choose(yourMonsInv)
-                        battleCoin = battle(monsterData, monsInvData, yourMonsInv, userInv, chosen, randomNumber, randomLevel, 'battle')
+                        battleCoin,damageTaken,damageDealt = battle(monsterData, monsInvData, yourMonsInv, userInv, chosen, randomNumber, randomLevel, 'battle')
                         coin += battleCoin
                         userData[id][4] = str(coin)
                         print(userInv)
