@@ -69,7 +69,7 @@ def potion(jumlahpot, indexPot, used_Pot_Array, userInventory, attack, defense, 
       if int(jumlahpot[1]) > 0 :                           # mengecek ada tidaknya potion resilience
         if used_Pot_Array[1] == 0 :                        # mengecek pernah tidaknya potion resilience digunakan
           used_Pot_Array[1] += 1
-          defense *= 105/100
+          defense *= 110/100   #DEFENSE BERTAMBAH 10 PERSEN
           print(f"Potion telah diminum {mons_Name}, {mons_Name} menjadi lebih sulit dilukai!!")
           jumlahpot[1] -=1
           userInventory[indexPot[1]][2] = str(int(userInventory[indexPot[1]][2])-1)
