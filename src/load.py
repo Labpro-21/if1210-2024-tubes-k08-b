@@ -105,7 +105,7 @@ def save(inventory,monster,user,monstershop,itemshop,monsterinventory) :
         write_csv(path+"/monster.csv",monster)
         write_csv(path+"/monster_shop.csv",monstershop)
         write_csv(path+"/item_shop.csv",itemshop)
-        write_csv(path+"/monser_inventory.csv",monsterinventory)
+        write_csv(path+"/monster_inventory.csv",monsterinventory)
     else :
         os.mkdir(path)
         write_csv(path+"/item_inventory.csv",inventory)
@@ -113,6 +113,6 @@ def save(inventory,monster,user,monstershop,itemshop,monsterinventory) :
         write_csv(path+"/monster.csv",monster)
         write_csv(path+"/monster_shop.csv",monstershop)
         write_csv(path+"/item_shop.csv",itemshop)
-        write_csv(path+"/monser_inventory.csv",monsterinventory)
+        write_csv(path+"/monster_inventory.csv",monsterinventory)
 
 
