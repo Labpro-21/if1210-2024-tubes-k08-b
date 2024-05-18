@@ -77,16 +77,16 @@ if data != [] :
                                 loginStatus=False
                                 break
                     elif command.lower() == 'shop' :
-                        shopCoin = shopOpen(role, itemShopData, coin, userInv, monsterData, monsShopData, yourMonsInv, monsInvData)
-                        userData[id][4] = str(shopCoin)
+                        coin = shopOpen(role, itemShopData, coin, userInv, monsterData, monsShopData, yourMonsInv, monsInvData)
+                        userData[id][4] = str(coin)
                     elif command.lower() == 'help' :
                         help(loginStatus, role)
                     elif command.lower() == 'laboratory' :
-                        labCoin = laboratory(yourMonsInv, monsterData, coin, role)
-                        userData[id][4] = str(labCoin)
+                        coin = laboratory(yourMonsInv, monsterData, coin, role)
+                        userData[id][4] = str(coin)
                     elif command.lower() == 'jackpot' :
-                        jackpotCoin = jackpot(id, coin, monsInvData, yourMonsInv)
-                        userData[id][4] = str(jackpotCoin)
+                        coin = jackpot(id, coin, monsInvData, yourMonsInv)
+                        userData[id][4] = str(coin)
                     else :
                         print(f"command '{command}' tidak ada.")
                         print(userInv)
