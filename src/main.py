@@ -34,9 +34,9 @@ if data != [] :
         elif command.lower() == "help" :
             help(loginStatus, "belumlogin")
         elif command.lower() == 'save' :
-            save(inventoryData, monsterData, userData, monsterShop, itemShop, monsInvData)
+            save(inventoryData, monsterData, userData, monsShopData, itemShopData, monsInvData)
         elif command.lower()=='exit' :
-            exit(userData, monsInvData, itemShop, monsterData, monsterShop, inventoryData)
+            exit(userData, monsInvData, itemShopData, monsterData, monsShopData, inventoryData)
             break
         else :
             print(f"command '{command}' tidak ada.")
@@ -102,7 +102,7 @@ if data != [] :
                     if command.lower() == 'help':
                         help(loginStatus, role)
                     elif command.lower() == 'shop':
-                        monsterShop, itemShop = shopmanagement(itemShopData, monsShopData, monsterData)
+                        monsShopData, itemShopData = shopmanagement(itemShopData, monsShopData, monsterData)
                     elif command.lower() == 'logout' :
                         t=0
                         while True :
@@ -112,7 +112,6 @@ if data != [] :
                                 t=1
                                 break
                             elif confirm.lower() =='n' :
-                                t=1
                                 break
                             else : 
                                 print("mangsud?")
