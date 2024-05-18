@@ -1,7 +1,8 @@
 import time
 from RandomNumberGenerator import RNG
 
-def cekrng(RNG):
+# fungsi prob untuk menghasilkan kemungkinan muncul masing-masing item
+def prob(RNG):
     if 1 <= RNG <= 40:
         return 0
     elif 41 <= RNG <= 65:
@@ -13,41 +14,41 @@ def cekrng(RNG):
     elif 96 <= RNG <= 100:
         return 4
 
-def gacha(id, yourcoin,monsInv,yourmonsterinventory):
-    icon = ['TOPI', 'PEDANG', 'BAJU', 'CELANA', 'JAM']
-    value = [30, 60, 80, 120, 170, 300]
-    RNG1 = RNG(1, 100)
-    time.sleep(0.2)
+# fungsi gacha untuk mengimplementasi probabilitas acak untuk mendapat reward
+def gacha(id, coin, monsInv, yourMonsInv):
+    icon = ['TOPI', 'PEDANG', 'BAJU', 'CELANA', 'JAM']  
+    iconValue = [60, 80, 120, 170, 300]                  # menunjukkan value masing-masing icon sesuai dengan index array icon secara berurut
+    RNG1 = RNG(1, 100)                                   # memberi range RNG masing-masing item
+    time.sleep(0.2)                                      # men-delay waktu karena RNG yang digunakan berdasar time
     RNG2 = RNG(1, 100)
-    time.sleep(0.1)
+    time.sleep(0.1)                               
     RNG3 = RNG(1, 100)
     
-    item1 = cekrng(RNG1)
-    item2 = cekrng(RNG2)
-    item3 = cekrng(RNG3)
-    totalcoin = value[item1] + value[item2] + value[item3]
+    indexItem1 = prob(RNG1)                               
+    indexItem2 = prob(RNG2)
+    indexItem3 = prob(RNG3)
+    totalcoin = iconValue[indexItem1] + iconValue[indexItem2] + iconValue[indexItem3]
 
-    print(f"{icon[item1]} | {icon[item2]} | {icon[item3]}")
+    print(f"{icon[indexItem1]} | {icon[indexItem2]} | {icon[indexItem3]}")
 
-    if item1 == item2 and item2 == item3:
+    if indexItem1 == indexItem2 and indexItem2 == indexItem3:
         print('SELAMAT!! ANDA MENDAPATKAN GORLOCK THE DESTROYER! DESTROY EVERYTHING!')
         if any(item[1] == "Gorlock" for item in monsInv):
-            print('SELAMAT!! GORLOCK SUDAH ANDA MILIKI, GORLOCK AKAN DIUBAH KE O.W.C.A Coin sebanyak 1000 Coin')
-            yourcoin += 1000
+            print('SELAMAT!! GORLOCK SUDAH ANDA MILIKI, GORLOCK AKAN DIUBAH KE O.W.C.A Coin sebanyak 2000 Coin')
+            coin += 2000
         else:
-            monsInv.append([str(id),"Gorlock",'1'])
-            yourmonsterinventory.append([str(id),"Gorlock",'1'])
+            monsInv.append([str(id),"Gorlock",'1'])                                      # append Gorlock ke list monsterInventory
+            yourMonsInv.append([str(id),"Gorlock",'1'])                                  # append Gorlock ke list yourMonsterInventory
     else:
         print(f"ANDA TIDAK DAPAT JACKPOT, TAPI ANDA DAPAT {totalcoin} COIN !!!")
-        yourcoin += totalcoin
-
-    return yourcoin
-
-def jackpot(id, yourcoin, monsInv,yourmonsterinventory):
-    yourcoin = int(yourcoin)
+        coin  += totalcoin
+    return coin
+ 
+def jackpot(id, coin,  monsInv , yourMonsInv):
+    coin  = int(coin) 
     print("SELAMAT DATANG DI JACKPOT 888!!!")
     print("ANDA DAPAT MENDAPATKAN GORLOCK THE DESTROYER DENGAN HARGA 500 COIN")
-    print(f"COIN ANDA SAAT INI SEJUMLAH {yourcoin}")
+    print(f"COIN ANDA SAAT INI SEJUMLAH {coin} ")
     print("APAKAH ANDA INGIN MENCOBA KEBERUNTUNGAN ANDA???")
 
     while True:
@@ -55,10 +56,10 @@ def jackpot(id, yourcoin, monsInv,yourmonsterinventory):
         if inp == 'y':
             confirm = input("APAKAH ANDA YAKIN? (Y/N) :").lower()
             if confirm == 'y':
-                if yourcoin >= 500:
-                    yourcoin = gacha(id, yourcoin, monsInv,yourmonsterinventory)
-                    yourcoin -= 500
-                    print(f'COIN ANDA TERSISA {yourcoin}')
+                if coin  >= 500:
+                    coin  = gacha(id, coin,  monsInv, yourMonsInv)
+                    coin  -= 500
+                    print(f'COIN ANDA TERSISA {coin} ')
                     print("APAKAH ANDA INGIN MELANJUTKAN??", end=" ")
                 else:
                     print("YAH COIN ANDA TIDAK CUKUP")
