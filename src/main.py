@@ -60,7 +60,7 @@ if data != [] :
                         coin += arenaCoin
                         userData[id][4] = str(coin)
                     elif command.lower() == 'inventory' :
-                        inventoryy(userInv, yourMonsInv, monsterData, role, coin)
+                        inventory(userInv, yourMonsInv, monsterData, role, coin)
                     elif command.lower() == 'logout' :
                         t=0
                         while True :
