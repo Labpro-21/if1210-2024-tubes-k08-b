@@ -1,4 +1,4 @@
-def inventoryy(userinventory,yourmonsterdata,monsterdata,role,coin) :
+def inventory(userinventory,yourmonsterdata,monsterdata,role,coin) :
     if role=='admin':  #jika role player adalah admin
         print("Maaf! Anda tidak memiliki akses sebagai admin")
     else :
