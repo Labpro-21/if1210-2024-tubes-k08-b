@@ -32,7 +32,6 @@ def laboratory(yourMonsData, coin, role):
               if ord(char) < ord('0') or ord(char) > ord('9'):
                 inputMonsUp = False
                   
-            print(monsUpgrade)
             if inputMonsUp != False : 
               if monsUpgrade <= yourMonsData[pilihMons-1][2] :                      # validasi input upgrade level <= level saat ini
                 print("Masa mau upgrade ke level yg sama/lebih rendah sih.. Itu mah downgrade kak")
