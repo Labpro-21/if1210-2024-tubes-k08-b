@@ -1,21 +1,5 @@
 from monsterManagement import cekint
-potionID = ["Type", "Healing Potion", "Resilience Potion", "Strength Potion", "Monster Ball"]
-
-#FUNGSI UNTUK MENYUSUN LIST POTION SHOP
-def sortPotion(potionShop):
-    if potionShop[1][0] == "Resilience Potion":
-            potionShop[1][0],potionShop[2][0] = potionShop[2][0],potionShop[1][0]
-    if potionShop[3][0] == "Resilience Potion":
-            potionShop[3][0],potionShop[2][0] = potionShop[2][0],potionShop[3][0]
-    if potionShop[4][0] == "Resilience Potion":
-            potionShop[4][0],potionShop[2][0] = potionShop[2][0],potionShop[4][0]
-    if potionShop[1][0] == "Strength Potion":
-            potionShop[1][0],potionShop[3][0] = potionShop[3][0],potionShop[1][0]
-    if potionShop[4][0] == "Strength Potion":
-            potionShop[4][0],potionShop[3][0] = potionShop[3][0],potionShop[4][0]
-    if potionShop[1][0] == "Monster Ball":
-            potionShop[1][0],potionShop[4][0] = potionShop[4][0],potionShop[1][0]
-    return potionShop
+itemID = ["Type", "Healing Potion", "Resilience Potion", "Strength Potion", "Monster Ball"]
 
 #TAMPILAN KASIR
 def shopInterface():
@@ -149,20 +133,20 @@ def shopOpen(role,potionShop,coin,userinventory,monsterdata,monstershop,yourmons
 def shopmanagement(potionShop,monstershop,monsterdata)   :
         print("   ↤↤↤↤ SELAMAT DATANG KEMBALI ADMIN! ↦↦↦↦")
         print()
-        shopInterface()
+        shopInterface()  #tampilkan kasir
         print()
         while True:
             pilihMenu = input(">>> Pilih aksi (lihat/tambah/ubah/hapus/keluar): ")
-            if pilihMenu == "lihat":
-                lihat_pilih = input(">>> Mau lihat apa? (monster/potion): ")
-                while lihat_pilih != "monster" and lihat_pilih != "potion":
-                    lihat_pilih = input(">>> Pilih antara monster/potion: ")
+            if pilihMenu.lower() == "lihat":
+                lihat_pilih = input(">>> Mau lihat apa? (monster/item): ")
+                while lihat_pilih != "monster" and lihat_pilih != "item":
+                    lihat_pilih = input(">>> Pilih antara monster/item: ")  #jika input bukan monster/item
                 if lihat_pilih == "monster":
                     print("ID | Type\t| ATK Power\t| DEF Power\t| HP\t| Stok\t| Harga")
                     for i in range(1,len(monstershop)): # Menampilkan setiap monster yang tersedia di Shop
                         idMonsterLihat=int(monstershop[i][0])
                         print(f"{monsterdata[idMonsterLihat][0]}  | {monsterdata[idMonsterLihat][1]}\t| {monsterdata[idMonsterLihat][2]}\t\t| {monsterdata[idMonsterLihat][3]}\t\t| {monsterdata[idMonsterLihat][4]}\t| {monstershop[i][1]}\t| {monstershop[i][2]}")
-                elif lihat_pilih == "potion":
+                elif lihat_pilih == "item":
                     print("ID | Type\t\t| Stok\t| Harga")
                     for i in range(1,len(potionShop)): # Menampilkan setiap potion yang tersedia di Shop
                         if potionShop[i][0] == "Healing Potion":
@@ -175,16 +159,16 @@ def shopmanagement(potionShop,monstershop,monsterdata)   :
                             idPotion = 4
                         print(f"{idPotion}  | {potionShop[i][0]}\t| {potionShop[i][1]}\t| {potionShop[i][2]}")
 
-            elif pilihMenu == "tambah":
+            elif pilihMenu.lower() == "tambah":
                 idMonsterShop = []
                 for i in range(1,len(monstershop)):
-                    idMonsterShop.append(monstershop[i][0])
+                    idMonsterShop.append(monstershop[i][0])   #membuat list yg berisi semua id monster yg terdapat dishop
                 idMonsterData = []
                 for i in range(1,len(monsterdata)):
-                    idMonsterData.append(monsterdata[i][0])
-                tambah_pilih = input("Mau tambah apa? (monster/potion): ")
-                while tambah_pilih != "monster" and tambah_pilih != "potion":
-                    tambah_pilih = (input(">>> Pilih antara monster/potion: "))
+                    idMonsterData.append(monsterdata[i][0])    #membuat list yg berisi semua id monster yg terdapat dimonster data
+                tambah_pilih = input("Mau tambah apa? (monster/item): ")
+                while tambah_pilih != "monster" and tambah_pilih != "item":
+                    tambah_pilih = (input(">>> Pilih antara monster/item: "))
                 if tambah_pilih == "monster":
                     print("ID | Type\t\t| ATK Power\t| DEF Power\t| HP\t|")
                     for i in range(1,len(monsterdata)): # Menampilkan setiap monster yang tersedia di Shop
@@ -195,149 +179,241 @@ def shopmanagement(potionShop,monstershop,monsterdata)   :
                             print(f"{i}  | {monsterdata[idMonsterLihat][1]}\t\t| {monsterdata[idMonsterLihat][2]}\t\t| {monsterdata[idMonsterLihat][3]}\t\t| {monsterdata[idMonsterLihat][4]}\t|")
                     print()
                     idMonsterTambah = input(">>> Masukkan id monster: ")
+                    #validasi kevalidan id
                     while idMonsterTambah in idMonsterShop or idMonsterTambah not in idMonsterData:
-                        if idMonsterTambah not in idMonsterData:
+                        if idMonsterTambah not in idMonsterData:  #jika id tidak ada pada data
                             print("ID tidak valid! Pilih ID yang terdapat pada tabel!")
                             idMonsterTambah = (input(">>> Masukkan id monster: "))
-                        elif idMonsterTambah in idMonsterShop:
+                        elif idMonsterTambah in idMonsterShop:  #jika id sudah ada dishop
                             print("Monster sudah ada di Shop!")
                             idMonsterTambah = (input(">>> Masukkan id monster: "))
-                    stokMonsterTambah = int(input(">>> Masukkan stok awal: "))
-                    hargaMonsterTambah = int(input(">>> Masukkan harga: "))
+                    stokMonsterTambah = (input(">>> Masukkan stok awal: "))
+                    while cekint(stokMonsterTambah) == False : #validasi integer
+                        print("masukkan integer yg benar")
+                        stokMonsterTambah = (input("Masukkan stok awal: "))
+                    hargaMonsterTambah = (input(">>> Masukkan harga: "))
+                    while cekint(hargaMonsterTambah) == False :  #validasi integer
+                        print("masukkan integer yg benar")
+                        hargaMonsterTambah = (input("Masukkan harga : "))
                     addMonsterShop = [idMonsterTambah,str(stokMonsterTambah),str(hargaMonsterTambah)]
                     monstershop.append(addMonsterShop)
                     print(f"{monsterdata[int(idMonsterTambah)][1]} telah berhasil ditambahkan ke dalam Shop!")
-                elif tambah_pilih == "potion":
+                elif tambah_pilih == "item":
+                    if len(potionShop)!=5 :  #jika itemshop tidak keisi semua
+                        print("ID | Type")
                     potionFound = False
                     countFalse = 0
-                    print("ID | Type")
-                    for i in range(1,4):
+                    for i in range(1,5):
                         for j in range(1,len(potionShop)):
-                            if potionID[i] in potionShop[j][0]:
+                            if itemID[i] in potionShop[j][0]:
                                 potionFound = True
                                 break
                             else:
                                 potionFound = False
                                 continue
                         if potionFound == False:
-                            print(f"{i}  | {potionID[i]}")
+                            print(f"{i}  | {itemID[i]}")   #menampilkan seluruh item yg tidak ada dishop
                             countFalse += 1
-                    if countFalse == 0:
-                        print("Semua Potion sudah tersedia pada Shop!")
+                    if countFalse == 0:   
+                        print("Semua Item sudah tersedia pada Shop!")
                         print()
                     else:
-                        idPotionTambah = int(input(">>> Masukkan id potion (1-4): "))
-                        while (idPotionTambah < 1 or idPotionTambah > 4):
-                            print("id tidak valid!")
-                            idPotionTambah = int(input(">>> Masukkan id potion (1-4): "))
-                        stokPotionTambah = int(input("Masukkan stok awal: "))
-                        hargaPotionTambah = int(input("Masukkan harga: "))
-                        newPotion = [potionID[idPotionTambah],str(stokPotionTambah),str(hargaPotionTambah)]
+                        while True :
+                            iditemTambah = (input(">>> Masukkan id item (1-4): "))
+                            #validasi integer
+                            if cekint(iditemTambah) == False :
+                                print("Masukkan integer yang benar")
+                                continue
+                            #validasi jika id<1 atau>4
+                            if (int(iditemTambah) < 1 or int(iditemTambah) > 4):
+                                print("id tidak valid!")
+                                continue
+                            sudahadadishop = True
+                            #validasi jika id sudah ada dishop
+                            for i in potionShop :
+                                if itemID[int(iditemTambah)]==i[0] :
+                                    print("Item sudah terdapat di shop")
+                                    break
+                            else :
+                                sudahadadishop =False
+                            if sudahadadishop == True :
+                                continue                            
+                            break
+                        stokPotionTambah = (input("Masukkan stok awal: "))
+                        #validasi integer
+                        while cekint(stokPotionTambah) == False :
+                            print("masukkan integer yg benar")
+                            stokPotionTambah = (input("Masukkan stok awal: "))
+                        hargaPotionTambah = (input("Masukkan harga: "))
+                        #validasi integer
+                        while cekint(hargaPotionTambah) == False :
+                            print("masukkan integer yg benar")
+                            hargaPotionTambah = (input("Masukkan harga :"))
+                        newPotion = [itemID[int(iditemTambah)],str(stokPotionTambah),str(hargaPotionTambah)]
                         potionShop.append(newPotion)
-                        sortPotion(potionShop)
-                        print(f"{potionID[idPotionTambah]} telah berhasil ditambahkan ke dalam Shop!")
+                        print(f"{itemID[int(iditemTambah)]} telah berhasil ditambahkan ke dalam Shop!")
                         print()
 
-            elif pilihMenu == "ubah":
-                ubah_pilih = input("Mau ubah apa? (monster/potion): ")
-                while ubah_pilih != "monster" and ubah_pilih != "potion":
-                    ubah_pilih = (input(">>> Pilih antara monster/potion: "))
+            elif pilihMenu.lower() == "ubah":
+                ubah_pilih = input("Mau ubah apa? (monster/item): ")
+                while ubah_pilih != "monster" and ubah_pilih != "item":
+                    ubah_pilih = (input(">>> Pilih antara monster/item: "))
                 if ubah_pilih == "monster":
-                    idMonsterUbah = (input(">>> Masukkan id monster: ")) # Nanti nambahin validasi
-                    stokMonsterBaru = (input(">>> Masukkan stok baru: "))
-                    hargaMonsterBaru = (input(">>> Masukkan harga baru: "))
-                    pesanUbah = f"{monsterdata[int(idMonsterUbah)][1]} telah berhasil diubah "
-                    if (stokMonsterBaru != ""):
-                        pesanUbah += f"dengan stok baru sejumlah {int(stokMonsterBaru)}"
-                        for i in range(len(monstershop)) :
-                            if monstershop[i][0]==(idMonsterUbah) :
-                                monstershop[i][1]=str(stokMonsterBaru)
-                    if (stokMonsterBaru != "") and (hargaMonsterBaru != ""):
-                        pesanUbah += " dan "
-                    if (hargaMonsterBaru != ""):
-                        pesanUbah += f"dengan harga baru {int(hargaMonsterBaru)}"
-                        for i in range(len(monstershop)) :
-                            if monstershop[i][0]==(idMonsterUbah) :
-                                monstershop[i][2]=str(hargaMonsterBaru)
-                    pesanUbah += "!"
-                    print(pesanUbah)
-                elif ubah_pilih == "potion":
-                    idPotionUbah = int((input(">>> Masukkan id potion: ")))
-                    while idPotionUbah < 1 or idPotionUbah > 4:
-                        print("ID tidak valid!")
-                        idPotionUbah = int((input(">>> Masukkan id potion: ")))
-                    stokPotionBaru = int((input(">>> Masukkan stok baru: ")))
-                    hargaPotionBaru = int((input(">>> Masukkan harga baru: ")))
-                    pesanUbah = f"{potionID[int(idPotionUbah)]} telah berhasil diubah "
-                    if (stokPotionBaru != ""):
-                        pesanUbah += f"dengan stok baru sejumlah {stokPotionBaru}"
-                    if (stokPotionBaru != "") and (hargaPotionBaru != ""):
-                        pesanUbah += " dan "
-                    if (hargaPotionBaru != ""):
-                        pesanUbah += f"dengan harga baru {hargaPotionBaru}"
-                    pesanUbah += "!"
-                    for i in range(1,len(potionShop)):
-                        if potionShop[i][0] == potionID[idPotionUbah]:
-                            potionShop[i] = [potionID[idPotionUbah],stokPotionBaru,hargaPotionBaru]
-                        else:
+                    while True :
+                        idMonsterUbah = (input(">>> Masukkan id monster: ")) 
+                        #validasi apakah id terdapat dishop
+                        for i in monstershop :
+                            if idMonsterUbah== i[0] :
+                                break
+                        else :
+                            print('ID tersebut tidak tersedia')
                             continue
-                    print(pesanUbah)
-                    print()
+                        stokMonsterBaru = (input(">>> Masukkan stok baru: "))
+                        #validasi integer
+                        while cekint(stokMonsterBaru)== False and stokMonsterBaru!="" :
+                            print("Masukkan integer yg benar")
+                            stokMonsterBaru = input('Masukkan stok baru:')
+                        hargaMonsterBaru = (input(">>> Masukkan harga baru: "))
+                        #validasi integer
+                        while cekint(hargaMonsterBaru)== False and hargaMonsterBaru!="" :
+                            print("Masukkan integer yg benar")
+                            hargaMonsterBaru = input('Masukkan stok baru:')
+                        pesanUbah = f"{monsterdata[int(idMonsterUbah)][1]} telah berhasil diubah "
+                        if (stokMonsterBaru != ""):  #jika stok berubah
+                            pesanUbah += f"dengan stok baru sejumlah {int(stokMonsterBaru)}"
+                            for i in range(len(monstershop)) :
+                                if monstershop[i][0]==(idMonsterUbah) :
+                                    monstershop[i][1]=str(stokMonsterBaru)
+                        if (stokMonsterBaru != "") and (hargaMonsterBaru != ""):
+                            pesanUbah += " dan "
+                        if (hargaMonsterBaru != ""): #jika harga berubah
+                            pesanUbah += f"dengan harga baru {int(hargaMonsterBaru)}"
+                            for i in range(len(monstershop)) :
+                                if monstershop[i][0]==(idMonsterUbah) :
+                                    monstershop[i][2]=str(hargaMonsterBaru)
+                        pesanUbah += "!"
+                        print(pesanUbah)
+                        break
+                elif ubah_pilih == "item":
+                    while True :
+                        iditemUbah = input(">>> Masukkan id item: ")
+                        #validasi integer
+                        if cekint(iditemUbah)==False :
+                            print("Masukkan integer yang benar")
+                            continue
+                        #validasi apakah id <1 atau >4 
+                        if int(iditemUbah) > 4 or int(iditemUbah) < 1 :
+                            print("Id tersebut tidak tersedia")
+                            continue
+                        #validasi apakah id tersebut terdapat dishop atau tidak
+                        for i in potionShop:
+                            if itemID[int(iditemUbah)]==i[0] :
+                                break
+                        else :
+                            print("Id tersebut tidak tersedia")
+                            continue
+                        stokitemBaru = ((input(">>> Masukkan stok baru: ")))
+                        #validasi integer
+                        while cekint(stokitemBaru)== False and stokitemBaru!="":
+                            print("Masukkan integer yg benar")
+                            stokitemBaru = input('Masukkan stok baru:')
+                        hargaitemBaru = ((input(">>> Masukkan harga baru: ")))
+                        #validasi integer
+                        while cekint(hargaitemBaru)== False and hargaitemBaru!="":
+                            print("Masukkan integer yg benar")
+                            hargaitemBaru = input('Masukkan harga baru:')
+                        pesanUbah = f"{itemID[int(iditemUbah)]} telah berhasil diubah "
+                        if (stokitemBaru != ""): #jika stok berubah
+                            for i in range(len(potionShop)) :
+                                if potionShop[i][0] == itemID[int(iditemUbah)]  :
+                                    potionShop[i][1]=str(stokitemBaru)
+                            pesanUbah += f"dengan stok baru sejumlah {stokitemBaru}"
+                        if (stokitemBaru != "") and (hargaitemBaru != ""):
+                            pesanUbah += " dan "
+                        if (hargaitemBaru != ""): #jika harga berubah
+                            for i in range(len(potionShop)) :
+                                if potionShop[i][0] == itemID[int(iditemUbah)]  :
+                                    potionShop[i][2]=str(hargaitemBaru)
+                            pesanUbah += f"dengan harga baru {hargaitemBaru}"
+                        pesanUbah += "!"
+                        print(pesanUbah)
+                        break
 
-            elif pilihMenu == "hapus":
-                hapusPilih = input(">>> Mau hapus apa? (monster/potion): ")
-                while hapusPilih != "monster" and hapusPilih != "potion":
-                    hapusPilih = (input(">>> Pilih antara monster/potion: "))
-                if hapusPilih == "monster":
-                    idMonsterHapus = int(input(">>> Masukkan id monster: "))
-                    idMonsterShop = []
-                    for i in range(1,len(monstershop)):
-                        idMonsterShop.append(monstershop[i][0])
-                    idMonsterData = []
-                    for i in range(1,len(monsterdata)):
-                        idMonsterData.append(monsterdata[i][0])
-                    if str(idMonsterHapus) not in idMonsterShop:
-                        print("Monster dengan ID tersebut tidak ada pada Shop!")
-                        idMonsterHapus = int(input(">>> Masukkan id monster: "))
-                    
-                    yakinHapus = input(f"Apakah anda yakin ingin menghapus {monsterdata[idMonsterHapus][1]} dari Shop (y/n)? ")
-                    if yakinHapus == "y":
-                        newMonsterList = [['monster_id','stock','price']]
-                        for i in range(1,len(monstershop)):
-                            if monstershop[i][0] == str(idMonsterHapus):
-                                continue
-                            else:
-                                newMonsterList.append(monstershop[i])
-                        monstershop = newMonsterList
-                        print(f"{monsterdata[idMonsterHapus][1]} telah berhasil dihapus dari Shop!")
-                    else:
-                        print("Penghapusan dibatalkan!")
-                        print()
-                        continue
-                elif hapusPilih == "potion":
-                    idPotionHapus = int(input(">>> Masukkan id potion: "))
-                    yakinHapus = input(f"Apakah anda yakin ingin menghapus {potionID[idPotionHapus]} dari Shop (y/n)? ")
-                    if yakinHapus == "y":
-                        print(potionShop)
-                        newPotionList = []
-                        for i in range(len(potionShop)):
-                            if potionShop[i][0] == potionID[idPotionHapus]:
-                                continue
-                            else:
-                                newPotionList.append(potionShop[i])
-                                print(newPotionList)
-                        potionShop = newPotionList
-                        print(potionShop)
-                        print(f"{potionID[int(idPotionHapus)]} telah berhasil dihapus dari Shop!")
-                        print()
-                    else:
-                        print("Penghapusan dibatalkan!")
-                        print()
-                        continue
+            elif pilihMenu.lower() == "hapus":
+                hapusPilih = input(">>> Mau hapus apa? (monster/item): ")
+                while hapusPilih != "monster" and hapusPilih != "item":
+                    hapusPilih = (input(">>> Pilih antara monster/item: "))
+                if hapusPilih.lower() == "monster":
+                    while True :
+                        idMonsterHapus = (input(">>> Masukkan id monster: "))
+                        #validasi apakah id tersebut terdapat dishop atau tidak
+                        for i in monstershop :
+                            if idMonsterHapus == i[0] :
+                                break
+                        else :
+                            print("Id tersebut tidak tersedia")
+                            continue
+                        idMonsterHapus=int(idMonsterHapus)
+                        while True :
+                            yakinHapus = input(f"Apakah anda yakin ingin menghapus {monsterdata[idMonsterHapus][1]} dari Shop (y/n)? ")
+                            if yakinHapus.lower() == "y":  #double check apakah benar ingin dihapus
+                                newMonsterList = [['monster_id','stock','price']]
+                                for i in range(1,len(monstershop)):
+                                    if monstershop[i][0] == str(idMonsterHapus):
+                                        continue
+                                    else:
+                                        newMonsterList.append(monstershop[i])
+                                monstershop = newMonsterList
+                                print(f"{monsterdata[idMonsterHapus][1]} telah berhasil dihapus dari Shop!")
+                                break
+                            elif yakinHapus.lower() =='n':
+                                print("Penghapusan dibatalkan!")
+                                print()
+                                break
+                            else :
+                                print("Masukkan Y/N")
+                        break
+                elif hapusPilih.lower() == "item":
+                    while True :
+                        iditemHapus = (input(">>> Masukkan id item: "))
+                        #validasi integer
+                        if cekint(iditemHapus)==False :
+                            print("Masukkan integer yang benar")
+                            continue
+                        #validasi apakah >4 atau <1
+                        if int(iditemHapus) > 4 or int(iditemHapus) < 1 :
+                            print("Id tersebut tidak tersedia")
+                            continue
+                        #validasi apakah id item terdapat dishop atau tidak
+                        for i in potionShop:
+                            if itemID[int(iditemHapus)]==i[0] :
+                                break
+                        else :
+                            print("Id tersebut tidak tersedia")
+                            continue
+                        while True :
+                            yakinHapus = input(f"Apakah anda yakin ingin menghapus {itemID[int(iditemHapus)]} dari Shop (y/n)? ")
+                            if yakinHapus.lower() == "y": #double cek apakah ingin dihapus
+                                newitemList = []
+                                for i in range(len(potionShop)):
+                                    if potionShop[i][0] == itemID[int(iditemHapus)]:
+                                        continue
+                                    else:
+                                        newitemList.append(potionShop[i])
+                                potionShop = newitemList
+                                print(f"{itemID[int(iditemHapus)]} telah berhasil dihapus dari Shop!")
+                                print()
+                                break
+                            elif yakinHapus.lower() =='n':
+                                print("Penghapusan dibatalkan!")
+                                print()
+                                break
+                            else :
+                                print("masukkan (Y/N)")
+                        break
 
-            else: # pilihMenu == "keluar"
+            elif pilihMenu.lower() == 'keluar': # pilihMenu == "keluar"
                 print("Sampai bertemu lagi Admin!")
                 return monstershop,potionShop
-
-# shopOpen("agent")
-# shopOpen("admin")
+            else : #jika aksi bukan tambah hapus ubah lihat dan keluar
+                print("aski tidak diketahui")
