@@ -25,12 +25,12 @@ def load() :
         return []
 
 def login(user,inventory,monsterinventory) : #fungsi untuk login
-    username = input("username :") #input username
-    password = input("password :") #input password
+    username = input("username: ") #input username
+    password = input("password: ") #input password
     for i in user :
         if i[1] == username : #pemeriksaan apakah username sesuai
             if i[2] == password : #pemeriksaan apakah password sesuai
-                if i[3] =='agent' : #jika pengguna adalah agent
+                if i[3] == 'agent' : #jika pengguna adalah agent
                     player_inventory = [] 
                     monster_inventory =[]
                     print("Login berhasil")
@@ -42,7 +42,7 @@ def login(user,inventory,monsterinventory) : #fungsi untuk login
                             monster_inventory.append(j)
                     return player_inventory,monster_inventory,i[3],int(i[4]) #mengembalikan data inventaris (barang dan monster) dan role
                     break
-                elif i[3] =='admin' : #jika pengguna adalah admin
+                elif i[3] == 'admin' : #jika pengguna adalah admin
                     print("Login berhasil")
                     return 1,1,i[3],1
             else :

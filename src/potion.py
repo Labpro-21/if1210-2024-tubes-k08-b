@@ -54,15 +54,15 @@ def potion(jumlahpot, indexPot, used_Pot_Array, userInventory, attack, defense, 
         if used_Pot_Array[0] == 0 :                        # mengecek pernah tidaknya potion strength digunakan
           used_Pot_Array[0] += 1
           attack *= 105/100
-          print(f"POTION HAS BEEN CONSUMED, {mons_Name.upper()} FEELS A BIT MORE STRONGER")
+          print(f"Potion STRENGTH telah diminum, {mons_Name} menjadi lebih KUAT!")
           jumlahpot[0] -= 1
           userInventory[indexPot[0]][2] = str(int(userInventory[indexPot[0]][2])-1)
           return attack                                    # return nilai attack monster setelah menggunakan potion strength
         else :
-          print("POTION CAN ONLY BE USE ONCE")
+          print("Potion STRENGTH hanya bisa digunakan sekali")
           return 0                                         # return 0 untuk mengindikasi potion tidak bisa digunakan
       else :
-        print("YOU DONT HAVE THE POTION")
+        print("Yahh.. Sayangnya Anda tidak memiliki potion RESILIENCE")
         return 0
       
     elif pilihan == 2 :
@@ -70,15 +70,15 @@ def potion(jumlahpot, indexPot, used_Pot_Array, userInventory, attack, defense, 
         if used_Pot_Array[1] == 0 :                        # mengecek pernah tidaknya potion resilience digunakan
           used_Pot_Array[1] += 1
           defense *= 110/100  
-          print(f"POTION HAS BEEN CONSUMED, {mons_Name.upper()} FEELS A BIT MORE STURDIER ")
+          print(f"Potion RESILIENCE telah diminum, {mons_Name} menjadi lebih SULIT DILUKAI!")
           jumlahpot[1] -=1
           userInventory[indexPot[1]][2] = str(int(userInventory[indexPot[1]][2])-1)
           return defense                                   # return nilai defense monster setelah menggunakan potion resilience
         else : 
-          print("POTION CAN ONLY BE USE ONCE")
+          print("Potion RESILIENCE hanya bisa digunakan sekali")
           return 0
       else :
-        print("YOU DONT HAVE THE POTION")
+        print("Yahh.. Sayangnya Anda tidak memiliki potion RESILIENCE")
         return 0
       
     elif pilihan==3 :
@@ -87,19 +87,19 @@ def potion(jumlahpot, indexPot, used_Pot_Array, userInventory, attack, defense, 
           used_Pot_Array[2] += 1
           if HP * 125/100 <= max_HP :                      # mengecek penggunaan potion melebihi HP maksimum atau tidak
             HP *= 125/100
-            print(f"POTION HAS BEEN CONSUMED, {mons_Name.upper()} REGENERATES SOME OF HIS HEALTH")
+            print(f"Potion HEALING telah diminum, HP {mons_Name} telah REGENERASI!")
             jumlahpot[2] -= 1
             userInventory[indexPot[2]][2] = str(int(userInventory[indexPot[2]][2])-1)
             return HP                                      # return nilai HP monster setelah menggunakan potion healing
           else :
             HP = max_HP
-            print(f"POTION HAS BEEN CONSUMED, {mons_Name.upper()} REGENERATES SOME OF HIS HEALTH")
+            print(f"Potion HEALING telah diminum, HP {mons_Name} telah REGENERASI!")
             jumlahpot[2] -= 1
             userInventory[indexPot[2]][2] = str(int(userInventory[indexPot[2]][2])-1)
             return HP
         else : 
-          print("POTION CAN ONLY BE USE ONCE")
+          print("Potion HEALING hanya bisa digunakan sekali")
           return 0
       else :
-        print("YOU DONT HAVE THE POTION")
+        print("Yahh.. Sayangnya Anda tidak memiliki potion HEALING")
         return 0

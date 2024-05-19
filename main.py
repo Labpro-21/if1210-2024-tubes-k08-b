@@ -22,8 +22,8 @@ if data != [] :
     monsShopData = data[5]
     loginStatus = False
     while True :
-        print("Type 'help' to seek wisdom from the ALMIGHT GOD")
-        command = input("--->")
+        print("Ketik 'Help' untuk mendapatkan petunjuk dari Almighty God")
+        command = input("---> ")
         if command.lower() == "login" :
             while True :
                 userInv, yourMonsInv, role, coin = login(userData, inventoryData, monsInvData)
@@ -46,8 +46,8 @@ if data != [] :
             if role.lower() == 'agent':
                 while True :
                     id = int(userInv[0][0])
-                    print("Type 'help' to seek wisdom from the ALMIGHT GOD")
-                    command = input("--->")
+                    print("Ketik 'Help' untuk mendapatkan petunjuk dari Almighty God")
+                    command = input("---> ")
                     if command.lower() == 'battle' :
                         randomNumber = RNG(1, len(monsterData))
                         time.sleep(2/10)
@@ -68,27 +68,25 @@ if data != [] :
                     elif command.lower() == 'inventory' :
                         inventory(userInv, yourMonsInv, monsterData, role, coin)
                     elif command.lower() == 'logout' :
-                        t=0
                         while True :
-                            confirm = input("Apakah anda yakin untuk logout?(Y/N)-->")
+                            confirm = input("Apakah anda yakin untuk logout?(Y/N)--> ")
                             if confirm.lower() == "y" :
                                 print("Logout berhasil")
-                                t = 1
+                                loginStatus = False
                                 break
                             elif confirm.lower() == 'n' :
                                 break
                             else : 
-                                print("mangsud?")
-                        if t==1 :
-                                loginStatus=False
-                                break
+                                print("Masukkan input yang benar")
+                        if loginStatus == False :
+                            break
                     elif command.lower() == 'shop' :
                         coin = shopOpen(role, itemShopData, coin, userInv, monsterData, monsShopData, yourMonsInv, monsInvData)
                         userData[id][4] = str(coin)
                     elif command.lower() == 'help' :
                         help(loginStatus, role)
                     elif command.lower() == 'laboratory' :
-                        coin = laboratory(yourMonsInv, monsterData, coin, role)
+                        coin = laboratory(yourMonsInv, coin, role)
                         userData[id][4] = str(coin)
                     elif command.lower() == 'jackpot' :
                         coin = jackpot(id, coin, monsInvData, yourMonsInv)
@@ -111,21 +109,19 @@ if data != [] :
                     elif command.lower() == 'shop':
                         monsShopData, itemShopData = shopmanagement(itemShopData, monsShopData, monsterData)
                     elif command.lower() == 'logout' :
-                        t=0
                         while True :
-                            confirm = input("Apakah anda yakin untuk logout?(Y/N)-->")
+                            confirm = input("Apakah anda yakin untuk logout?(Y/N)--> ")
                             if confirm.lower() == "y" :
                                 print("Logout berhasil")
-                                t=1
-                                break
-                            elif confirm.lower() =='n' :
-                                break
-                            else : 
-                                print("mangsud?")
-                        if t==1 :
                                 loginStatus = False
                                 break
+                            elif confirm.lower() == 'n' :
+                                break
+                            else : 
+                                print("Masukkan input yang benar")
+                        if loginStatus == False :
+                            break
                     elif command.lower() == 'monster' :
                         monsterManagement(monsterData)
                     else :
-                        print("apansih")
+                        print(f"command '{command}' tidak ada.")
