@@ -109,21 +109,19 @@ if data != [] :
                     elif command.lower() == 'shop':
                         monsShopData, itemShopData = shopmanagement(itemShopData, monsShopData, monsterData)
                     elif command.lower() == 'logout' :
-                        t=0
                         while True :
-                            confirm = input("Apakah anda yakin untuk logout?(Y/N)-->")
+                            confirm = input("Apakah anda yakin untuk logout?(Y/N)--> ")
                             if confirm.lower() == "y" :
                                 print("Logout berhasil")
-                                t=1
-                                break
-                            elif confirm.lower() =='n' :
-                                break
-                            else : 
-                                print("mangsud?")
-                        if t==1 :
                                 loginStatus = False
                                 break
+                            elif confirm.lower() == 'n' :
+                                break
+                            else : 
+                                print("Masukkan input yang benar")
+                        if loginStatus == False :
+                            break
                     elif command.lower() == 'monster' :
                         monsterManagement(monsterData)
                     else :
-                        print("apansih")
+                        print(f"command '{command}' tidak ada.")
