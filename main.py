@@ -102,7 +102,7 @@ if data != [] :
                         print(monsShopData)
             elif role == 'admin' :
                 while True :
-                    print("Type 'help' to seek wisdom from the ALMIGHT GOD")
+                    print("Ketik 'Help' untuk mendapatkan petunjuk dari Almighty God")
                     command = input("--->")
                     if command.lower() == 'help':
                         help(loginStatus, role)
