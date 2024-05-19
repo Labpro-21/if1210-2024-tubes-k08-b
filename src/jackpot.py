@@ -32,11 +32,11 @@ def gacha(id, coin, monsInv, yourMonsInv):
     print(f"{icon[indexItem1]} | {icon[indexItem2]} | {icon[indexItem3]}")
 
     if indexItem1 == indexItem2 and indexItem2 == indexItem3:
-        print('SELAMAT!! ANDA MENDAPATKAN GORLOCK THE DESTROYER! DESTROY EVERYTHING!')
         if any(item[1] == "Gorlock" for item in monsInv):
-            print('SELAMAT!! GORLOCK SUDAH ANDA MILIKI, GORLOCK AKAN DIUBAH KE O.W.C.A Coin sebanyak 2000 Coin')
+            print('JACKPOT!! KARENA GORLOCK SUDAH ANDA MILIKI, GORLOCK AKAN DIUBAH KE O.W.C.A Coin sebanyak 2000 Coin')
             coin += 2000
         else:
+            print('JACKPOT!! ANDA MENDAPATKAN GORLOCK THE DESTROYER! DESTROY EVERYTHING!')
             monsInv.append([str(id),"Gorlock",'1'])                                      # append Gorlock ke list monsterInventory
             yourMonsInv.append([str(id),"Gorlock",'1'])                                  # append Gorlock ke list yourMonsterInventory
     else:
@@ -50,16 +50,17 @@ def jackpot(id, coin,  monsInv , yourMonsInv):
     print("SELAMAT DATANG DI JACKPOT 888!!!")
     print("ANDA DAPAT MENDAPATKAN GORLOCK THE DESTROYER DENGAN HARGA 500 COIN")
     print(f"COIN ANDA SAAT INI SEJUMLAH {coin} ")
-    print("APAKAH ANDA INGIN MENCOBA KEBERUNTUNGAN ANDA???")
+    print("APAKAH ANDA INGIN MENCOBA KEBERUNTUNGAN ANDA???", end=" ")
 
     while True:
         inp = input("(Y/N)----->").lower()
         if inp == 'y':
-            confirm = input("APAKAH ANDA YAKIN? (Y/N) :").lower()
+            confirm = input("APAKAH ANDA YAKIN? (Y/N): ").lower()
             if confirm == 'y':
-                if coin  >= 500:
-                    coin  = gacha(id, coin,  monsInv, yourMonsInv)
-                    coin  -= 500
+                if coin >= 500:
+                    coin = gacha(id, coin,  monsInv, yourMonsInv)
+                    coin -= 500
+                    print()
                     print(f'COIN ANDA TERSISA {coin} ')
                     print("APAKAH ANDA INGIN MELANJUTKAN??", end=" ")
                 else:
