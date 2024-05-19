@@ -63,6 +63,7 @@ def inventory(userInventory, yourMonsData, monsterData, role, coin) :
                         print('Masukkan input yang benar')
 
             elif check.lower() == 'back' :
+                print("Sampai jumpa lagi !!")
                 break 
 
             else :

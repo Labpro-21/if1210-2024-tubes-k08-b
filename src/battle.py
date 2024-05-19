@@ -135,7 +135,7 @@ def battle(monsterdata,monsterinventory,yourmonsterdata,userinventory,chosen,ran
             time.sleep(1/10)
             damage = yourattack*(damagerng/100)
             if enemyhealth >= (damage-(enemydefense/100)*damage) :  #menghitung damagedealt jika enemy belom mati
-                damagedealt += (damage-(enemydefense/100)*damage)
+                damagedealt += (int(damage-(enemydefense/100)*damage)+1)
             else : #jika enemy mati maka damagedealt hanya ditambah sebesar sisa darah enemy sebelum mati
                 damagedealt += enemyhealth
             enemyhealth -= (damage-(enemydefense/100)*damage) 
@@ -143,7 +143,10 @@ def battle(monsterdata,monsterinventory,yourmonsterdata,userinventory,chosen,ran
             #MENAMPILKAN MEKANISME DAMAGE SERANGAN
             print("=============================================")
             print(">>>>>>>>>>>>>>>YOU ATTACKED !!!<<<<<<<<<<<<<<")
-            print(f"ATTACK DAMAGE : {damage} (+{damagerng-100}%)")
+            if damagerng < 100 :
+                print(f"ATTACK DAMAGE : {damage} ({damagerng-100}%)")
+            else :
+                print(f"ATTACK DAMAGE : {damage} (+{damagerng-100}%)")
             print(f"REDUCED DAMAGE : {(enemydefense/100)*damage} ({enemydefense}%)")
             print(f"TOTAL DAMAGE : {(damage-(enemydefense/100)*damage)}")
             if enemyhealth > 0 : #JIKA MONSTER BELOM MATI
@@ -197,6 +200,7 @@ def battle(monsterdata,monsterinventory,yourmonsterdata,userinventory,chosen,ran
             if type =='battle' : #Jika mode battle action 3 adalah monster ball
                 success = monsterball(random_number,random_level,userinventory,monsterdata,monsterinventory,yourmonsterdata)
                 if success==1 :
+                    print("")
                     return 0,damagetaken,damagedealt
                 elif success ==2 : #Jika gagal
                     continue
@@ -226,7 +230,8 @@ def battle(monsterdata,monsterinventory,yourmonsterdata,userinventory,chosen,ran
             print("YOU DEFEATED YOUR ENEMY")
             print("WELL DONE")
             coin = RNG(1,50)
-            print(f"YOU GOT {coin} COINS")
+            if type.lower() == 'battle' :
+                print(f"YOU GOT {coin} COINS")
             print("=============================================")
             return coin,damagetaken,damagedealt
         
@@ -235,13 +240,16 @@ def battle(monsterdata,monsterinventory,yourmonsterdata,userinventory,chosen,ran
         damagemusuh=enemyattack*(damagemusuhrng/100)
         print(f">>>>>>>>>>>>>{file1[random_number][1]} ATTACK BACK !!!<<<<<<<<<<<<")
         if yourhealth >= (damagemusuh - (yourdefense/100)*damagemusuh) :
-            damagetaken += (damagemusuh - (yourdefense/100)*damagemusuh) #Jika monster kita masih hidup setelah serangan
+            damagetaken += int(damagemusuh - (yourdefense/100)*damagemusuh) +1 #Jika monster kita masih hidup setelah serangan
         else :
             damagetaken += yourhealth #jika monster kita mati setelah serangan
         yourhealth -= (damagemusuh - (yourdefense/100)*damagemusuh)
         yourhealth = int(yourhealth)
         #MENAMPILKAN MEKANISMA DAMAGE SERANGAN
-        print(f"ATTACK DAMAGE : {damagemusuh} (+{damagemusuhrng-100}%)")
+        if damagemusuhrng < 100 :
+            print(f"ATTACK DAMAGE : {damagemusuh} ({damagemusuhrng-100}%)")
+        else :
+            print(f"ATTACK DAMAGE : {damagemusuh} (+{damagemusuhrng-100}%)")
         print(f"REDUCED DAMAGE : {(yourdefense/100)*damagemusuh} ({yourdefense}%)")
         print(f"TOTAL DAMAGE : {(damagemusuh - (yourdefense/100)*damagemusuh)}")
         if yourhealth >0 : #jika monster kita masih hidup

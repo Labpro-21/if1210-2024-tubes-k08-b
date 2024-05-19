@@ -22,7 +22,7 @@ if data != [] :
     monsShopData = data[5]
     loginStatus = False
     while True :
-        print("Ketik 'Help' untuk mendapatkan petunjuk dari Almighty God")
+        print("Type 'help' to seek wisdom from the ALMIGHT GOD")
         command = input("--->")
         if command.lower() == "login" :
             while True :
@@ -46,7 +46,7 @@ if data != [] :
             if role.lower() == 'agent':
                 while True :
                     id = int(userInv[0][0])
-                    print("Ketik 'Help' untuk mendapatkan petunjuk dari Almighty God")
+                    print("Type 'help' to seek wisdom from the ALMIGHT GOD")
                     command = input("--->")
                     if command.lower() == 'battle' :
                         randomNumber = RNG(1, len(monsterData))
@@ -104,7 +104,7 @@ if data != [] :
                         print(monsShopData)
             elif role == 'admin' :
                 while True :
-                    print("Ketik 'Help' untuk mendapatkan petunjuk dari Almighty God")
+                    print("Type 'help' to seek wisdom from the ALMIGHT GOD")
                     command = input("--->")
                     if command.lower() == 'help':
                         help(loginStatus, role)

@@ -66,6 +66,10 @@ def arena(monsterdata,monsterinventory,yourmonsterdata,userinventory) :
                 break
             else :  #monster kita menang
                 stage += 1
+                print("STAGE CLEARED")
+                print()
+                if stage != 6 :
+                    print("PREPARING NEXT STAGE")
 
         for i in range(1,stage) :
             coins += reward[i-1]

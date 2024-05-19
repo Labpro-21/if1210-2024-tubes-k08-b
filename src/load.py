@@ -56,14 +56,35 @@ def login(user,inventory,monsterinventory) : #fungsi untuk login
 def register(user,inventory,monsterinventory,monster) : #fungsi untuk register
     while True :
         usernamebaru = input("Masukkan Username :") #meminta input username baru dari pengguna
-        #pemeriksaan apakah username sudah terpakai
+        status = False
+        for char in usernamebaru:
+            ascii_value = ord(char)
+            # Check if the character is a letter, number, hyphen, or underscore
+            valid = (
+                (65 <= ascii_value <= 90) or  # A-Z
+                (97 <= ascii_value <= 122) or # a-z
+                (48 <= ascii_value <= 57) or  # 0-9
+                ascii_value == 45 or          # strip (-)
+                ascii_value == 95             # underscore (_)
+            )
+            # If any character is not valid, return False
+            if valid == False:
+                print("Username hanya boleh mengandung huruf,angka,strip dan underscore")
+                break
+        else :
+            status = True
+        if status == False :
+            continue
         for i in user :
             if i[1]== usernamebaru :
                 print("Username sudah terpakai")
+                status = False
                 break
         else :
-        #jika username belum terpakai, keluar dari loop
-            break
+            status = True
+        if status == False :
+            continue
+        break
     passwordbaru = input("Masukkan password :") #meminta input password baru dari pengguna
     #menampilkan pilihan monster untuk pengguna
     print('PILIH MONSTER PERTAMA ANDA :')
@@ -112,6 +133,7 @@ def save(inventory,monster,user,monstershop,itemshop,monsterinventory) :
         write_csv(path+"/monster_shop.csv",monstershop)
         write_csv(path+"/item_shop.csv",itemshop)
         write_csv(path+"/monster_inventory.csv",monsterinventory)
+        print()
     else :
         os.mkdir(path)
         write_csv(path+"/item_inventory.csv",inventory)
