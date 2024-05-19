@@ -1,7 +1,3 @@
-'''from csvParser import *
-pathFileMonster = r"data\data1\monster.csv"
-listMonster = csvReadInt(pathFileMonster)'''
-
 # FUNGSI UNTUK PENAMBAHAN MONSTER
 # Fungsi - fungsi proses untuk mengecek validasi input data monster
 def cekint(input):
@@ -204,6 +200,3 @@ SELAMAT DATANG DI DATABASE PARA MONSTER !!!
             break
         else :
             print("Input tidak valid, input yang diterima hanya 0/1/2")
-
-# PENERAPAN FUNGSI
-# monsterManagement()
