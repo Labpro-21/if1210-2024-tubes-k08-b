@@ -3,6 +3,7 @@ from RandomNumberGenerator import *
 
 def arena(monsterdata,monsterinventory,yourmonsterdata,userinventory) :
     #deklarasi variabel
+    reward = [20,35,50,75,90]  #coins gain from defeating each stage
     coins=0
     totaldamageTaken = 0
     totaldamageDealt = 0
@@ -29,7 +30,6 @@ def arena(monsterdata,monsterinventory,yourmonsterdata,userinventory) :
             print(f"--------->>>STAGE {i+1}<<<---------")
             opening(monsterdata,random_number)
             coin,damageTaken,damageDealt = battle(monsterdata,monsterinventory,yourmonsterdata,userinventory,chosen,random_number,enemylevel,'arena')
-            coins += coin
             totaldamageTaken += damageTaken
             totaldamageDealt += damageDealt
 
@@ -39,9 +39,12 @@ def arena(monsterdata,monsterinventory,yourmonsterdata,userinventory) :
             else :  #monster kita menang
                 stage += 1
 
-        if stage==5 :   #jika berhasil sampai ke stage terakhir dan menang akan mendapatkan bonus 50 coin
+        for i in range(1,stage) :
+            coins += reward[i-1]
+        
+        if stage==6 :   #jika berhasil sampai ke stage terakhir dan menang akan mendapatkan bonus 50 coin
             print("CONGRATULATION YOU MADE IT ALL THE WAY!!!!")
-            print("HERE A BONUS 50 COINs FOR YOU!!!")
+            print("HERE A BONUS 50 COINS FOR YOU!!!")
             coins += 50
 
         #STATISTIK ARENA
