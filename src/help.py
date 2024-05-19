@@ -1,4 +1,5 @@
-def help(status,role) :
+def help(status,role) : #jika pengguna belum login, status akan menjadi false dan mengeluarkan beberapa command umum
+    #command umum
     if status == False :
         print("List command yang dapat anda lakukan :")
         print("1. Login")
@@ -9,8 +10,9 @@ def help(status,role) :
         print("   Menyimpan semua perubahan dalam sebuah folder")
         print("4. Exit")
         print("   Keluar dari program")
-    else :
-        if role == 'agent' :
+    else : #jika pengguna sudah login, tampilkan daftar perintah berdasarkan role pengguna
+        if role == 'agent' : #jika pengguna adalah agent
+            #command yang dapat dilakukan oleh agent
             print("List command yang dapat anda lakukan :")
             print("1. Battle")
             print("   1v1 dengan monster random")
@@ -26,7 +28,8 @@ def help(status,role) :
             print("   Tempat untuk menguji keberuntungan anda")
             print("7. Logout")
             print("   Keluar dari akun anda")
-        if role == 'admin' :
+        if role == 'admin' : #jika pengguna adalah admin
+            #command yang dapat dilakukan oleh admin
             print("List command yang dapat anda lakukan :")
             print("1. Shop")
             print("   Manage shop")
