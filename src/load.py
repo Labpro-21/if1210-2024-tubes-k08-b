@@ -34,7 +34,7 @@ def login(user,inventory,monsterinventory) : #fungsi untuk login
                 if i[3] =='agent' : #jika pengguna adalah agent
                     player_inventory = [] 
                     monster_inventory =[]
-                    print("login berhasil")
+                    print("Login berhasil")
                     for j in inventory : #pengumpulan inventaris barang pengguna
                         if j[0]==i[0] :
                             player_inventory.append(j) 
@@ -44,6 +44,7 @@ def login(user,inventory,monsterinventory) : #fungsi untuk login
                     return player_inventory,monster_inventory,i[3],int(i[4]) #mengembalikan data inventaris (barang dan monster) dan role
                     break
                 elif i[3] =='admin' : #jika pengguna adalah admin
+                    print("Login berhasil")
                     return 1,1,i[3],1
             else :
                 print("password salah") #jika password salah
