@@ -16,7 +16,7 @@ def inventory(userInventory, yourMonsData, monsterData, role, coin) :
                 while True :        
                     itemNumber = input('Masukkan nomor item untuk menampilkan detail item (1/2/3/Back): ')
                     inputNum = True                                                  # validasi input selain 1/2/3/dst/back
-                    for char in monsNumber:
+                    for char in itemNumber:
                         if ord(char) < ord('0') or ord(char) > ord('9'):
                             inputNum = False
                             
