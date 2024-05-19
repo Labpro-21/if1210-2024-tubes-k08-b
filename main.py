@@ -88,7 +88,7 @@ if data != [] :
                     elif command.lower() == 'help' :
                         help(loginStatus, role)
                     elif command.lower() == 'laboratory' :
-                        coin = laboratory(yourMonsInv, monsterData, coin, role)
+                        coin = laboratory(yourMonsInv, coin, role)
                         userData[id][4] = str(coin)
                     elif command.lower() == 'jackpot' :
                         coin = jackpot(id, coin, monsInvData, yourMonsInv)
