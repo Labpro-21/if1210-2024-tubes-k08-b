@@ -1,7 +1,4 @@
 def laboratory(yourmonsterdata,monsterdata,coin,role):
-  if role == 'admin' :  #jika role adalah admin
-    print('Maaf! Anda tidak memiliki akses sebagai admin')
-  else : #role == 'agent' 
     array_Harga = [100, 200, 400, 700] #list harga untuk mengupgrade level monster
 
     while True: 
@@ -76,5 +73,5 @@ def laboratory(yourmonsterdata,monsterdata,coin,role):
             break
       else:     
          break
-  return coin
+    return coin
 

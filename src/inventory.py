@@ -1,7 +1,4 @@
 def inventory(userInventory, yourMonsData, monsterData, role, coin) :
-    if role == 'admin':
-        print("Maaf! Anda tidak memiliki akses sebagai admin")
-    else :
         print(f'jumlah OWCA coin anda saat ini : {coin}')
         while True :
             check = input('Silakan pilih jenis item yang ingin diketahui Anda (Monster/Item/Back): ')
