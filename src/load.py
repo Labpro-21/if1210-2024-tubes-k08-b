@@ -1,5 +1,4 @@
-from readwritecsv import *
-from csvParser import *
+from src.readwritecsv import *
 import os
 import argparse
 def load() :

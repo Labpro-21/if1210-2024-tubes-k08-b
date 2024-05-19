@@ -1,4 +1,4 @@
-from monsterManagement import cekint
+from src.monsterManagement import cekint
 itemID = ["Type", "Healing Potion", "Resilience Potion", "Strength Potion", "Monster Ball"]
 
 #TAMPILAN KASIR

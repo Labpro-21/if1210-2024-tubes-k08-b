@@ -1,4 +1,4 @@
-from RandomNumberGenerator import *
+from src.RandomNumberGenerator import *
 
 # Fungsi untuk fitur bonus Monster Ball
 def monsterball(monsterid,monsterlevel,userinventory,monsterdata,monsterinventory,yourmonsterdata):

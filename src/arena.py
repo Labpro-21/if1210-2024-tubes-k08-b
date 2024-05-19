@@ -1,5 +1,5 @@
-from battle import *
-from RandomNumberGenerator import *
+from src.battle import *
+from src.RandomNumberGenerator import *
 
 def arena(monsterdata,monsterinventory,yourmonsterdata,userinventory) :
     #deklarasi variabel

@@ -1,7 +1,7 @@
 #import module yang dibutuhkan 
-from potion import *
-from RandomNumberGenerator import *
-from monsterball import *
+from src.potion import *
+from src.RandomNumberGenerator import *
+from src.monsterball import *
 
 #fungsi untuk memilih monster yg ingin dipakai untuk battle
 def choose(yourmonsterdata) :

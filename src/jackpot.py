@@ -1,5 +1,5 @@
 import time
-from RandomNumberGenerator import RNG
+from src.RandomNumberGenerator import RNG
 
 # fungsi prob untuk menghasilkan kemungkinan muncul masing-masing item
 def prob(RNG):

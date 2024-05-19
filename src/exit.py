@@ -1,4 +1,4 @@
-from load import save
+from src.load import save
 def exit(user,monsterinventory,itemshop,monster,monstershop,iteminventory):
     confirmExit = input(("Apakah Anda mau melakukan penyimpanan file yang sudah diubah (y/n)"))
     while confirmExit != "y" and confirmExit != "n":
