@@ -52,6 +52,9 @@ if data != [] :
                         randomNumber = RNG(1, len(monsterData))
                         time.sleep(2/10)
                         randomLevel = RNG(1,5)
+                        confirm = battlerule()
+                        if confirm.lower() == "n" :
+                            continue
                         opening(monsterData, randomNumber)
                         chosen = choose(yourMonsInv)
                         battleCoin,damageTaken,damageDealt = battle(monsterData, monsInvData, yourMonsInv, userInv, chosen, randomNumber, randomLevel, 'battle')

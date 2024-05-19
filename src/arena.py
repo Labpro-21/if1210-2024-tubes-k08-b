@@ -1,5 +1,44 @@
 from src.battle import *
 from src.RandomNumberGenerator import *
+def arenaart() :
+    print(f'''
+                                T~~
+                                /"
+                        T~~     |'| T~~
+                    T~~ |    T~ WWWW|
+                    |  /"\   |  |  |/\T~~
+                    /"\ WWW  /"\ |' |WW|
+                    WWWWW/\| /   \|'/\|/"
+                    |   /__\/]WWW[\/__\WWWW
+                    |"  WWWW'|I_I|'WWWW'  |
+                    |   |' |/  -  \|' |'  |
+                    |'  |  |LI=H=LI|' |   |
+                    |   |' | |[_]| |  |'  |
+                    |   |  |_|###|_|  |   |
+                    '---'--'-/___\-'--'---' ''')
+
+def arenarule() :
+    arenaart()
+    print("""
+======================WELCOME TO THE ARENA======================
+ARENA MEKANISM :
+    1. THERE WILL BE A TOTAL OF 5 STAGES IN THE ARENA, EACH STAGE YOU WILL BE BATTLING 
+       A RANDOMLY SELECTED MONSTER
+    2. YOUR ENEMY LEVEL WILL BE EQUAL TO THE STAGE NUMBER YOUR CURRENTLY ON
+    3. DEFEATING EACH STAGE WILL GAVE YOU A REWARD, THE HIGHER THE STAGE, THE
+       THE GREATER THE REWARD
+    4. IF YOU LOSE ONCE, THE ARENA WILL BE OVER
+    5. IF YOU WIN ALL THE WAY, YOU WILL GET A BONUS REWARD
+    6. POTIONS EFFECT ONLY LAST TILL THE END OF EACH STAGE
+    7. MONSTER BALL IS PROHIBITED IN THE ARENA    """)
+    while True :
+        confirm = input("PROCEED?(Y/N)--->")
+        if confirm.lower() =='y' :
+            return confirm
+        elif confirm.lower() =='n' :
+            return confirm
+        else :
+            print("BE CLEAR")
 
 def arena(monsterdata,monsterinventory,yourmonsterdata,userinventory) :
     #deklarasi variabel
@@ -7,21 +46,10 @@ def arena(monsterdata,monsterinventory,yourmonsterdata,userinventory) :
     coins=0
     totaldamageTaken = 0
     totaldamageDealt = 0
-
-    print("DO YOU WANT TO ENTER THE ARENA? (Y/N)") #double cek dari user
-    inp = input("--->")
-    if inp.lower()=="n" : #jika tidak jadi
+    confirm = arenarule()
+    if confirm.lower()=="n" : #jika tidak jadi
         print("SEE U ANOTHER DAY")
-    elif inp.lower()=="y" :   
-        print("==========WELCOME TO THE ARENA==========")
-        print("RULES :")
-        print("1. THERE WILL BE A TOTAL OF 5 STAGES IN THE ARENA, EACH STAGE")
-        print("   YOU HAVE TO FIGHT A MONSTER WITH EACH STAGE THE MONSTER WILL GET STRONGER")
-        print("2. DEFEATING A MONSTER IN EACH STAGE WILL REWARD YOU WITH COINS, THE HIGHER")
-        print("   THE STAGE THE BIGGER THE REWARD")
-        print("3. IF YOU LOSE ONCE, THE ARENA WILL BE OVER, IF YOU WIN ALL THE WAY")
-        print("   TO THE FIFTH STAGE YOU WILL GET MAXIMUM COINS")
-        
+    else :   
         chosen = choose(yourmonsterdata) #fungsi untuk memilih monster dari pilihan monsterinventory
         stage = 1
         for i in range(5) : #pemanggilan fungsi battle sebanyak maksimum 5 kali
@@ -55,6 +83,4 @@ def arena(monsterdata,monsterinventory,yourmonsterdata,userinventory) :
         print(f"TOTAL DAMAGE TAKEN : {totaldamageTaken}")
         print(f"TOTAL DAMAGE DEALT : {totaldamageDealt}")
         print("==========================================")
-    else :
-        print("Masukkan input yg benar(Y/N)--->")
     return coins
