@@ -76,7 +76,7 @@ def register(user,inventory,monsterinventory,monster) : #fungsi untuk register
         if status == False :
             continue
         for i in user :
-            if i[1]== usernamebaru :
+            if i[1]== usernamebaru : #jika username sudah terpakai
                 print("Username sudah terpakai")
                 status = False
                 break

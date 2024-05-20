@@ -75,6 +75,7 @@ def laboratory(yourMonsData, coin, role):
             print('Maaf! Monster yang Anda pilih sudah memiliki level maksimum. Silakan pilih monster lain')
             break
       elif pilihMons.lower() == 'back' :
+        print("Sampai bertemu lagi !")
         break
       else :     
         print("Masukkan nomor monster yang benar")
