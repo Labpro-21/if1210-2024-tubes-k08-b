@@ -68,10 +68,12 @@ def jackpot(id, coin,  monsInv , yourMonsInv):
                     print("SILAKAN COBA JACKPOT DI WAKTU LAIN")
                     break
             elif confirm == 'n':
+                print("Sampai bertemu lagi :)")
                 return coin
             else:
                 print("Masukkan input yang benar")
         elif inp == 'n':
+            print("Sampai bertemu lagi :)")
             return coin
         else:
             print("Masukkan input yang benar")

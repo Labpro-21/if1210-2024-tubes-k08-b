@@ -92,13 +92,6 @@ if data != [] :
                         userData[id][4] = str(coin)
                     else :
                         print(f"command '{command}' tidak ada.")
-                        print(userInv)
-                        print(inventoryData)
-                        print(userData)
-                        print(monsInvData)
-                        print(yourMonsInv)
-                        print(itemShopData)
-                        print(monsShopData)
             elif role == 'admin' :
                 while True :
                     print("Ketik 'Help' untuk mendapatkan petunjuk dari Almighty God")
