@@ -33,7 +33,12 @@ def checkAttack(attack):
     while True:
         if cekint(attack): # bila keseluruhan attack berupa angka
             attack = int(attack) # ubah menjadi integer agar dapat dioperasikan
+            if attack < 0 :
+                print("Masa attack mines yg bener aje")
+                attack = str(input("Masukkan attack power : "))
+                continue
             break 
+
         else : # terdapat character yang bukan angka
             print("Masukkan bukan bertipe integer, coba lagi!")
             attack = str(input("Masukkan attack power : ")) # input berupa string karena untuk pengecekan isdigit()
@@ -57,6 +62,10 @@ def checkHp(hp):
     while True:
         if cekint(hp): # keseluruhan hp berupa angka
             hp = int(hp) # ubah menjadi integer agar dapat dioperasikan
+            if hp < 0 :
+                print("masa hp mines yang bener aje")
+                hp = str(input("Masukkan hp : "))
+                continue
             break
         else : # terdapat character yang bukan angka pada hp
             print("Masukkan bukan bertipe integer, coba lagi!")
