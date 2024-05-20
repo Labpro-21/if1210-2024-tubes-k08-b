@@ -33,9 +33,9 @@ def gacha(id, coin, monsInv, yourMonsInv):
     print("==========================")
 
     if indexItem1 == indexItem2 and indexItem2 == indexItem3:
-        print('SELAMAT!! ANDA MENDAPATKAN GORLOCK THE DESTROYER! DESTROY EVERYTHING!')
+        print('JACKPOT!! ANDA MENDAPATKAN GORLOCK THE DESTROYER! DESTROY EVERYTHING!')
         if any(item[1] == "Gorlock" for item in monsInv):
-            print('SELAMAT!! GORLOCK SUDAH ANDA MILIKI, GORLOCK AKAN DIUBAH KE O.W.C.A Coin sebanyak 2000 Coin')
+            print('GORLOCK SUDAH ANDA MILIKI, GORLOCK AKAN DIUBAH KE O.W.C.A Coin sebanyak 2000 Coin')
             coin += 2000
         else:
             monsInv.append([str(id),"Gorlock",'1'])                                      # append Gorlock ke list monsterInventory
