@@ -62,7 +62,7 @@ def potion(jumlahpot, indexPot, used_Pot_Array, userInventory, attack, defense, 
           print("Potion STRENGTH hanya bisa digunakan sekali")
           return 0                                         # return 0 untuk mengindikasi potion tidak bisa digunakan
       else :
-        print("Yahh.. Sayangnya Anda tidak memiliki potion RESILIENCE")
+        print("Yahh.. Sayangnya Anda tidak memiliki potion STRENGTH")
         return 0
       
     elif pilihan == 2 :
