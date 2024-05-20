@@ -200,7 +200,7 @@ def battle(monsterdata,monsterinventory,yourmonsterdata,userinventory,chosen,ran
             if type =='battle' : #Jika mode battle action 3 adalah monster ball
                 success = monsterball(random_number,random_level,userinventory,monsterdata,monsterinventory,yourmonsterdata)
                 if success==1 :
-                    print("")
+                    print(f"{file1[random_number][1].upper()} IS ADDED TO YOUR INVENTORY")
                     return 0,damagetaken,damagedealt
                 elif success ==2 : #Jika gagal
                     continue
@@ -229,7 +229,7 @@ def battle(monsterdata,monsterinventory,yourmonsterdata,userinventory,chosen,ran
             print("=============================================")
             print("YOU DEFEATED YOUR ENEMY")
             print("WELL DONE")
-            coin = RNG(1,50)
+            coin = RNG(1,100)
             if type.lower() == 'battle' :
                 print(f"YOU GOT {coin} COINS")
             print("=============================================")

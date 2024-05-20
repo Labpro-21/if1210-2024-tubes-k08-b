@@ -42,7 +42,7 @@ ARENA MEKANISM :
 
 def arena(monsterdata,monsterinventory,yourmonsterdata,userinventory) :
     #deklarasi variabel
-    reward = [20,35,50,75,90]  #coins gain from defeating each stage
+    reward = [30,45,60,75,90]  #coins gain from defeating each stage
     coins=0
     totaldamageTaken = 0
     totaldamageDealt = 0

@@ -28,8 +28,9 @@ def gacha(id, coin, monsInv, yourMonsInv):
     indexItem2 = prob(RNG2)
     indexItem3 = prob(RNG3)
     totalcoin = iconValue[indexItem1] + iconValue[indexItem2] + iconValue[indexItem3]
-
+    print("==========================")
     print(f"{icon[indexItem1]} | {icon[indexItem2]} | {icon[indexItem3]}")
+    print("==========================")
 
     if indexItem1 == indexItem2 and indexItem2 == indexItem3:
         print('SELAMAT!! ANDA MENDAPATKAN GORLOCK THE DESTROYER! DESTROY EVERYTHING!')

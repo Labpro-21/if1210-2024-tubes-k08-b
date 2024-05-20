@@ -60,7 +60,6 @@ if data != [] :
                         battleCoin,damageTaken,damageDealt = battle(monsterData, monsInvData, yourMonsInv, userInv, chosen, randomNumber, randomLevel, 'battle')
                         coin += battleCoin
                         userData[id][4] = str(coin)
-                        print(userInv)
                     elif command.lower() == 'arena' :
                         arenaCoin = arena(monsterData, monsInvData, yourMonsInv, userInv)
                         coin += arenaCoin

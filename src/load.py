@@ -19,7 +19,7 @@ def load() :
         monsterinventory = read_csv(path+"/monster_inventory.csv")
         itemshop=read_csv(path+"/item_shop.csv")
         monstershop=read_csv(path+"/monster_shop.csv")
-        return [user,inventory,monster,monsterinventory,itemshop,monstershop]
+        return [user,inventory,monster,monsterinventory,itemshop,monstershop] #return semua variabel utama
     else: # folder tidak ditemukan
         print(f"Folder \"{path}\" tidak ditemukan.")
         return []
@@ -124,17 +124,17 @@ def write(path,data) :
 
 def save(inventory,monster,user,monstershop,itemshop,monsterinventory) :
     # ALGORITMA
-    path = "data/" + input("Masukkan nama folder: ")
+    path = "data/" + input("Masukkan nama folder: ") #path folder tujuan
     print("Saving...")
-    if (os.path.exists(path)) :
+    if (os.path.exists(path)) : #jika folder sudah ada
         write_csv(path+"/item_inventory.csv",inventory)
         write_csv(path+"/user.csv",user)
         write_csv(path+"/monster.csv",monster)
         write_csv(path+"/monster_shop.csv",monstershop)
         write_csv(path+"/item_shop.csv",itemshop)
         write_csv(path+"/monster_inventory.csv",monsterinventory)
-        print()
-    else :
+        print(f"Berhasil melakukan Save pada folder {path}")
+    else : #jika folder belum ada
         os.mkdir(path)
         write_csv(path+"/item_inventory.csv",inventory)
         write_csv(path+"/user.csv",user)
@@ -142,3 +142,5 @@ def save(inventory,monster,user,monstershop,itemshop,monsterinventory) :
         write_csv(path+"/monster_shop.csv",monstershop)
         write_csv(path+"/item_shop.csv",itemshop)
         write_csv(path+"/monster_inventory.csv",monsterinventory)
+        print(f"Membuat folder baru {path}")
+        print(f"Berhasil melakukan Save pada folder {path}")
